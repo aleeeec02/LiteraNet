@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Libro.h"
 #include "Lista.h"
 #include "Cola.h"
 #include "Review.h"
@@ -32,7 +33,7 @@ Libro* buscarLibro(string codigo) {
 	for (int i = 0; i < lst_libro->longitud(); i++) {
 		if (lst_libro->obtenerPos(i)->getCodigo() == codigo) {
 			cout << "Se encontro el Libro: " << endl;
-			cout << lst_libro->obtenerPos(i)->getCodigo()<<endl;
+			cout << lst_libro->obtenerPos(i)->getCodigo() << endl;
 			cout << lst_libro->obtenerPos(i)->getNombre() << endl;
 			return lst_libro->obtenerPos(i);
 		}
@@ -44,7 +45,7 @@ int main()
 {
 	Reserva* reserva; // guardara las reservas desencoladas;
 	int opcion, countUser = 0, countLib = 0; // contadores para los registros
-	string comment,codigo,nombre; // auxiliares input
+	string comment, codigo, nombre; // auxiliares input
 
 	//******************* Registros *********************
 	do {
@@ -69,6 +70,17 @@ int main()
 	cout << "Ingrese su Codigo de Usuario: "; getline(cin, codigo);
 	Usuario* usuarioExistente;
 	usuarioExistente = buscarUsuario(codigo); //Devuelve un Objeto si el usuario esta registrado	
+
+
+	if (libroExistente) {
+		string comentarioUsuario;
+		cout << "Por favor, ingrese su comentario sobre el libro: ";
+		getline(cin, comentarioUsuario); // Obtener la línea completa del comentario del usuario
+
+		// Agregar la reseña del usuario al libro encontrado
+		libroExistente->agregarResena(comentarioUsuario, 5); // Aquí, estoy asumiendo 5 estrellas, puedes cambiarlo
+	}
+
 	//Busqueda de Libro por Codigo 
 	cout << "Ingrese Codigo del Libro a Reservar: "; getline(cin, codigo);
 	Libro* libroExistente;
@@ -95,5 +107,5 @@ int main()
 		lst_review->obtenerPos(i)->getReview();
 	}
 	*/
-	
+
 }
