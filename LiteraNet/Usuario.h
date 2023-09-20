@@ -1,17 +1,16 @@
-#include <string>
-using namespace std;
+#pragma once
+//Esta clase se creara de manera manual
 
-class Usuario {
-protected:
-	string codigo;
-	string nombre;
+
+class Usuario : public Persona {
 public:
-	Usuario(){}
-	Usuario(string codigo, string nombre ){ this->codigo = codigo; this->nombre = nombre; }
-	string getCodigo() {
-		return codigo;
-	}
-	string getNombre() {
-		return nombre;
-	}
+	Usuario() :Persona() { this->direccion = ""; }
+	Usuario(string nom, string ape, int ed, int d, string cor, string direc):Persona(nom, ape, ed, d, cor), direccion(direc){}
+	~Usuario(){}
+
+	void setDireccion(string direc) { this->direccion = direc; }
+	string getDireccion() { return this->direccion; }
+
+private:
+	string direccion;
 };
