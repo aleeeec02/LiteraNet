@@ -5,6 +5,8 @@
 #include "Review.h"
 #include "Reserva.h"
 #include <stdio.h>
+#include <locale>
+
 //Colecciones
 Lista<Review*>* lst_review = new Lista<Review*>();
 Cola<Reserva*>* cola_reserva = new Cola<Reserva*>();
@@ -43,6 +45,10 @@ Libro* buscarLibro(string codigo) {
 
 int main()
 {
+	//Validación de tildes SPA
+	locale loc("es_PE.UTF-8");
+
+
 	Reserva* reserva; // guardara las reservas desencoladas;
 	int opcion, countUser = 0, countLib = 0; // contadores para los registros
 	string comment, codigo, nombre; // auxiliares input
