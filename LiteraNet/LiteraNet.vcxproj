@@ -131,10 +131,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\%40aleeeec02\LiteraNet\LiteraNet\Libro.h" />
+    <ClInclude Include="Autor.h" />
     <ClInclude Include="Cola.h" />
+    <ClInclude Include="common-dependencies.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="Pago.h" />
+    <ClInclude Include="Persona.h" />
     <ClInclude Include="Review.h" />
+    <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
