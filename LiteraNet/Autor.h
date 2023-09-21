@@ -1,6 +1,7 @@
 #pragma once
 //Esta clase sera con Archivos, sera la unica manera de agregar autores
 #include "Persona.h"
+#include "common-dependencies.h"
 
 class Autor : public Persona {
 public:
