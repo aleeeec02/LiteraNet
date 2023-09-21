@@ -1,7 +1,8 @@
 #pragma once
+class Libro;
+
 
 #include "Persona.h"
-#include "Libro.h"
 #include <fstream>
 #include <sstream> // permite identificar la separaciones de strings (en este caso comas para identificar usernames; manipular y dividir strings)
 #include <functional> //lambda
@@ -15,6 +16,7 @@ using namespace std;
 
 //Esta clase se creara de manera manual
 
+class Libro;
 
 class Usuario : public Persona {
 private:
@@ -62,5 +64,7 @@ public:
 		return userID;
 	}
 
-
+	string getCodigo() {
+		return userID;
+	}
 };

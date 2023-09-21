@@ -1,4 +1,15 @@
 ﻿  LiteraNet.cpp
-D:\literanettt\LiteraNet\LiteraNet\Libro.h(4,13): error C2011: 'Libro': nueva definición del tipo 'class'
-D:\literanettt\LiteraNet\LiteraNet\Libro.h(4,7): message : vea la declaración de 'Libro'
-D:\literanettt\LiteraNet\LiteraNet\Persona.h(1,1): fatal  error C1083: No se puede abrir el archivo biblioteca de tipos: 'common-dependencies.h': No such file or directory
+D:\literanettt\LiteraNet\LiteraNet\Usuario.h(55,9): error C2535: 'std::string Usuario::getDireccion(void)': función miembro ya definida o declarada
+D:\literanettt\LiteraNet\LiteraNet\Usuario.h(53,9): message : vea la declaración de 'Usuario::getDireccion'
+D:\literanettt\LiteraNet\LiteraNet\Pago.h(10,11): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(63,6): error C2064: el término no se evalúa como una función con 1 argumentos
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(82,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(95,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(108,5): error C2084: la función 'int main(void)' ya tiene un cuerpo
+D:\literanettt\LiteraNet\LiteraNet\Pago.h(68,5): message : vea la definición anterior de 'main'
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(124,6): error C2064: el término no se evalúa como una función con 1 argumentos
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(136,39): error C2661: 'Usuario::Usuario': ninguna función sobrecargada acepta 2 argumentos
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(136,39): message : al hacer coincidir la lista de argumentos '(std::string, std::string)'
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(145,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(157,6): error C2065: 'libroExistente': identificador no declarado
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(163,3): error C2065: 'libroExistente': identificador no declarado

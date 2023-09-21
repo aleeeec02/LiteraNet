@@ -1,7 +1,6 @@
-
 #pragma once
 
-
+#include "common-dependencies.h"
 
 
 //Por el momento la clase Persona en realidad no necesita template
