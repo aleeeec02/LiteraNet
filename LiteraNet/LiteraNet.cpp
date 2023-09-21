@@ -1,28 +1,86 @@
+#pragma once
 #include <iostream>
+#include <stdio.h>
+
 #include "Libro.h"
+#include "Review.h"
+#include "Usuario.h"
+
+
+#include "Pago.h"
+#include "Reserva.h"
+
 #include "Lista.h"
 #include "Cola.h"
-#include "Review.h"
-#include "Reserva.h"
-#include <stdio.h>
+
+
+#include <string>
+#include <fstream>
+#include <sstream>
+
 #include <locale>
+
 
 //Colecciones
 Lista<Review*>* lst_review = new Lista<Review*>();
 Cola<Reserva*>* cola_reserva = new Cola<Reserva*>();
 Lista<Libro*>* lst_libro = new Lista<Libro*>();
 Lista<Usuario*>* lst_usuario = new Lista<Usuario*>();
+
+// ****************************************//
+// VALIDACIONES NECESARIAS			       //
+// para entradas de datos usando lambda    //
+// ****************************************//
+
+
+//Función para verificar si el username existe
+auto usernameYaExistente = std::make_shared<std::function<bool(const std::string&)>>(
+	[](const std::string& username) -> bool {
+
+	ifstream archivoEntrada("usernames.txt");
+	string linea;
+
+	//Lee cada línea del archivo
+	while (getline(archivoEntrada, linea)) {
+		istringstream iss(linea); // Usar istringstream para dividir las líneas
+
+		string usernameYaExistente;
+
+		// Si no se puede leer el username del usuario, terminar ciclo
+		if (!(iss >> usernameYaExistente)) { break; }
+
+		if (usernameYaExistente == username) {
+			return true;
+		}
+	}
+	return false; // Retorna falso si el usuario no existe (bool)
+	}
+);
+
+//Función para crear un nuevo usuario
+auto crearUsuario = [](const string& username, const string& codigoUsername) {
+	if (usernameYaExistente(username)) {
+		cout << "El username ya está ocupado." << endl;
+		return;
+	}
+	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'añadir')
+	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (añadir una coma para facilitar el análisis más tarde)
+};
+
+
+
 //Prospecto de Menu
 void menu() {
-	cout << "Ingrese una Opcion: " << endl;;
+	cout << "Ingrese una Opción: " << endl;;
 	cout << "Registrar Usuario" << endl;
 	cout << "Registrar Libro" << endl;
 }
+
 //Busca un Usuario de la Lista por codigo
 Usuario* buscarUsuario(string codigo) {
 	for (int i = 0; i < lst_usuario->longitud(); i++) {
 		if (lst_usuario->obtenerPos(i)->getCodigo() == codigo) {
-			cout << "Se encontro el Usuario: " << endl;
+			cout << "Se encontró el Usuario: " << endl;
 			cout << lst_usuario->obtenerPos(i)->getCodigo() << endl;
 			cout << lst_usuario->obtenerPos(i)->getNombre() << endl;
 			return lst_usuario->obtenerPos(i);
@@ -30,18 +88,21 @@ Usuario* buscarUsuario(string codigo) {
 	}
 	cout << "Error: Usuario No Registrado";
 }
+
 //Busca un Usuario de la Lista por codigo
 Libro* buscarLibro(string codigo) {
 	for (int i = 0; i < lst_libro->longitud(); i++) {
 		if (lst_libro->obtenerPos(i)->getCodigo() == codigo) {
-			cout << "Se encontro el Libro: " << endl;
+			cout << "Se encontró el Libro: " << endl;
 			cout << lst_libro->obtenerPos(i)->getCodigo() << endl;
 			cout << lst_libro->obtenerPos(i)->getNombre() << endl;
 			return lst_libro->obtenerPos(i);
 		}
 	}
 	cout << "Error: Libro No Registrado";
+	return nullptr;
 }
+
 
 int main()
 {
@@ -52,6 +113,20 @@ int main()
 	Reserva* reserva; // guardara las reservas desencoladas;
 	int opcion, countUser = 0, countLib = 0; // contadores para los registros
 	string comment, codigo, nombre; // auxiliares input
+
+
+	// Datos de prueba para corroborar que no se pueden duplicar ni reescribir datos
+	string username = "maria";
+	string codigoUsername = "12345";
+
+	// UsuarioExistente
+	if (usernameYaExistente(username)) {
+		cout << "EL usuario ya existe." << endl;
+	} else {
+		crearUsuario(username, codigoUsername);
+		cout << "Usuario creado exitósamente" << endl;
+	}
+
 
 	//******************* Registros *********************
 	do {

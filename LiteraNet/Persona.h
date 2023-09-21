@@ -1,6 +1,12 @@
+
 #pragma once
+
+
+
+
 //Por el momento la clase Persona en realidad no necesita template
 //Revisar el constructor y destructor
+
 
 class Persona {
 public:
