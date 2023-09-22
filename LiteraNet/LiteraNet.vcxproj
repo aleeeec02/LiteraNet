@@ -130,10 +130,10 @@
     <ClCompile Include="LiteraNet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\%40aleeeec02\LiteraNet\LiteraNet\Libro.h" />
     <ClInclude Include="Autor.h" />
     <ClInclude Include="Cola.h" />
     <ClInclude Include="common-dependencies.h" />
+    <ClInclude Include="Libro.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="Pago.h" />
     <ClInclude Include="Persona.h" />

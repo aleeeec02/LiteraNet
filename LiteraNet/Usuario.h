@@ -50,7 +50,6 @@ public:
 	~Usuario(){}
 
 	void setDireccion(string direc) { this->direccion = direc; }
-	string getDireccion() { return this->direccion; }
 
 	string getDireccion() {
 		return this->direccion;
