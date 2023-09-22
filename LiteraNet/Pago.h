@@ -64,15 +64,3 @@ public:
         return false;
     }
 };
-
-int main() {
-    Pago pago1(50.0, Efectivo, Soles);
-    Pago pago2(100.0, Tarjeta, Soles, "4539570161823386");  // Número de tarjeta válido para prueba
-    Pago pago3(200.0, Tarjeta, Dolares, "1234567812345678");  // Número de tarjeta inválido para prueba
-
-    pago1.procesarPago();
-    pago2.procesarPago();
-    pago3.procesarPago();
-
-    return 0;
-};
