@@ -45,6 +45,7 @@ public:
 	}
 	Usuario(std::string nom, std::string ape, int ed, int d, std::string cor, std::string direc)
 		: Persona(nom, ape, ed, d, cor), direccion(direc) {
+		generarCodigoDeUsuario(); // Automáticamente crea un userID cuando un nuevo usuario es creado
 	}
 
 	~Usuario(){}
