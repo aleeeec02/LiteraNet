@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "Usuario.h"
-
+#include "Autor.h"
 #include "Review.h"
 
 
@@ -14,6 +14,8 @@
 #include "Lista.h"
 #include "Cola.h"
 
+#include <conio.h>
+#include <vector>
 
 #include <string>
 #include <fstream>
@@ -27,6 +29,7 @@ Lista<Review*>* lst_review = new Lista<Review*>();
 Cola<Reserva*>* cola_reserva = new Cola<Reserva*>();
 Lista<Libro*>* lst_libro = new Lista<Libro*>();
 Lista<Usuario*>* lst_usuario = new Lista<Usuario*>();
+Lista<Autor*>* lst_autor = new Lista<Autor*>();
 
 // ****************************************//
 // VALIDACIONES NECESARIAS			       //
@@ -67,14 +70,89 @@ auto crearUsuario = [](const string username, const string& codigoUsername) {
 	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'añadir')
 	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (añadir una coma para facilitar el análisis más tarde)
 };
+void crearUsuario2(int num) {
+	string nombre, apellido, correo, direccion;
+	int edad, dni;
+	cout << "------Registrar Usuario------" << endl;
+	cout << "Ingresar nombre: ";
+	cin >> nombre;
+	cout << "Ingresar apellido: ";
+	cin >> apellido;
+	cout << "Ingresar edad: ";
+	cin >> edad;
+	cout << "Ingresar correo: ";
+	cin >> correo;
+	cout << "Ingresar DNI: ";
+	cin >> dni;
+	cout << "Ingresar direccion: ";
+	cin >> direccion;
+	Usuario* user = new Usuario(nombre, apellido, edad, dni, correo, direccion);
+	lst_usuario->agregarPos(user, num);
+}
+void MostrarUsuarios() {
+	for (int i = 0; i < lst_usuario->longitud(); i++) {
+		cout << "Codigo del usuario: " << lst_usuario->obtenerPos(i)->getUserID();
+		cout << "\nUsuario: " << i + 1 << endl;
+		lst_usuario->obtenerPos(i)->Mostrar();
+	}
+}
+void leerArchivoAutor(vector<string>& datos) {
+	ifstream archivo("Autores.txt", ios::in);
+	if (!archivo.is_open())
+		cout << "No se puede abrir el archivo." << endl;
+	string linea;
+	while (getline(archivo, linea)) {
+		istringstream iss(linea);
+		string dato;
+		while (iss >> dato) {
+			datos.push_back(dato);
+		}
+	}
+	archivo.close();
+}
+void RegistrarAutor(vector<string>& datos) {
+	string nombre, apellido, correo, alias;
+	int edad, dni, numlib, cont;
+	cont = 0;
+	for (int i = 0; i < datos.size(); i = i + 7) {
+		nombre = datos.at(i);
+		apellido = datos.at(i + 1);
+		edad = stoi(datos.at(i + 2));
+		dni = stoi(datos.at(i + 3));
+		correo = datos.at(i + 4);
+		numlib = stoi(datos.at(i + 5));
+		alias = datos.at(i + 6);
+		Autor* writher = new Autor(nombre, apellido, edad, dni, correo, numlib, alias);
+		lst_autor->agregarPos(writher, cont++);
+	}
+}
 
-
+void MostrarAutor() {
+	for (int i = 0; i < lst_autor->longitud(); i++) {
+		cout << "\n-----Autor: " << i + 1 << "-----" << endl;
+		cout << "\nAlias: " << lst_autor->obtenerPos(i)->getAlias() << endl;
+		lst_autor->obtenerPos(i)->Mostrar();
+	}
+}
 
 //Prospecto de Menu
-void menu() {
-	cout << "Ingrese una Opción: " << endl;;
-	cout << "Registrar Usuario" << endl;
-	cout << "Registrar Libro" << endl;
+int menu() {
+	int op;
+	cout << "\n";
+	cout << "----------Menu----------" << endl;
+	cout << "1. Registrar Usuario." << endl;
+	cout << "2. Mostrar Usuario." << endl;
+	cout << "3. Buscar Usuario." << endl;
+	cout << "4. Mostrar autores." << endl;
+	cout << "5. Buscar Libro." << endl;
+	cout << "6. Salir." << endl;
+	cout << "-Ingrese una opcion: ";
+	do {
+		cin >> op;
+		if (op < 0 || op > 6)
+			cout << "Ingrese una opcion valida.";
+	} while (op < 0 || op>6);
+	return op;
 }
 
 //Busca un Usuario de la Lista por codigo
@@ -109,7 +187,43 @@ int main()
 {
 	//Validación de tildes SPA
 	locale loc("es_PE.UTF-8");
-
-	cout << "Hola gente :v toco hacer el Menu";
+	vector<string> datos;
+	string codigous, codigoli;
+	int num = 0, op;
+	do {
+		system("cls");
+		op = menu();
+		if (op == 5) {
+			cout << "Adios." << endl;
+			break;
+		}
+		switch (op) {
+		case 1:crearUsuario2(num);
+			num++;
+			break;
+		case 2: MostrarUsuarios();
+			_getch();
+			break;
+		case 3:
+			cout << "Ingrese el codigo del usuario: ";
+			cin >> codigous;
+			buscarUsuario(codigous);
+			_getch();
+			break;
+		case 4: leerArchivoAutor(datos);
+			RegistrarAutor(datos);
+			MostrarAutor();
+			_getch();
+			break;
+		case 5:
+			cout << "Ingrese el codigo del libro: ";
+			cin >> codigoli;
+			buscarLibro(codigoli);
+		case 6:
+			cout << "Adios";
+			break;
+		}
+	} while (op != 6);
+	return 0;
 
 }
