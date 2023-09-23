@@ -1,14 +1,32 @@
 ﻿  LiteraNet.cpp
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Pago.h(10,11): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(82,20): warning C4018: '<': no coinciden signed/unsigned
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(95,20): warning C4018: '<': no coinciden signed/unsigned
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': no coinciden signed/unsigned
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Lista.h(152,34): message : al compilar la función del miembro clase plantilla "T Lista<T>::obtenerPos(uint)"
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\Pago.h(10,28): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(93,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(131,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(160,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(173,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\Lista.h(152,34): message : al compilar la función del miembro clase plantilla "T Lista<T>::obtenerPos(uint)"
           with
           [
               T=Libro *
           ]
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(96,3): message : vea la primera referencia a “Lista<Libro *>::obtenerPos” en “buscarLibro”
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(28,32): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Libro *>" que se está compilando
-C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(91): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
-  LiteraNet.vcxproj -> C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\x64\Debug\LiteraNet.exe
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(174,3): message : Vea la referencia a la creación de una instancia de la función plantilla "T Lista<T>::obtenerPos(uint)" que se está compilando
+          with
+          [
+              T=Libro *
+          ]
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(30,45): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Libro *>" que se está compilando
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\Lista.h(89,27): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\Lista.h(82,45): message : al compilar la función del miembro clase plantilla "void Lista<Usuario *>::agregarPos(T,uint)"
+          with
+          [
+              T=Usuario *
+          ]
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(90,25): message : Vea la referencia a la creación de una instancia de la función plantilla "void Lista<Usuario *>::agregarPos(T,uint)" que se está compilando
+          with
+          [
+              T=Usuario *
+          ]
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(31,51): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Usuario *>" que se está compilando
+C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\LiteraNet\LiteraNet.cpp(169): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
+  LiteraNet.vcxproj -> C:\Users\Usuario\OneDrive\Escritorio\Proyecto\LiteraNet\x64\Debug\LiteraNet.exe
