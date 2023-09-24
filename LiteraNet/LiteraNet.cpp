@@ -22,6 +22,7 @@
 #include <sstream>
 
 #include <locale>
+#include <Windows.h>
 
 
 //Colecciones
@@ -251,7 +252,7 @@ void buscarLibroPorCodigo(string codigoli) {
 	initializeLocale();
 
 	string codigo;
-	cout << "Ingrese el código del libro que desea buscar: ";
+	cout << "Ingrese el codigo del libro que desea buscar: ";
 	cin >> codigo;
 
 	CargarLibrosDesdeArchivo();
@@ -276,7 +277,7 @@ void buscarLibroPorCodigo(string codigoli) {
 int main()
 {
 	//Validación de tildes SPA
-	locale loc("es_PE.UTF-8");
+	initializeLocale();
 	vector<string> datos;
 	string codigous, codigoli;
 	int num = 0, op;
@@ -355,7 +356,7 @@ int main()
 
 		while (getline(inFile, line)) {
 			Libro libro = Libro::Deserializar(line);
-			cout << "Código del libro: " << libro.getCodigo() << endl;
+			cout << "Codigo del libro: " << libro.getCodigo() << endl;
 			cout << "Nombre del libro: " << libro.getNombre() << endl;
 			cout << "Precio del libro: " << libro.getPrecio() << endl;
 			cout << "--------------------" << endl;
@@ -366,12 +367,32 @@ int main()
 
 
 	auto operacionBuscarLibro = []() {
-
+		initializeLocale();
 		string codigoli;
-		cout << "Ingrese el código del libro que desea buscar: ";
+		cout << "Ingrese el codigo del libro que desea buscar: ";
 		cin >> codigoli;
-		buscarLibroPorCodigo(codigoli);
+
+		ifstream inFile("libros.txt"); // Recibe datos de libros.txt
+		string line;
+		bool found = false;
+
+		while (getline(inFile, line)) {
+			Libro libro = Libro::Deserializar(line);
+			if (libro.getCodigo() == codigoli) {
+				cout << "Detalles del Libro:" << endl;
+				libro.obtenerDetalles();
+				found = true;
+				break;
+			}
+		}
+
+		inFile.close();
+
+		if (!found) {
+			cout << "Libro no encontrado." << endl;
+		}
 		};
+
 
 
 	do {
@@ -394,6 +415,7 @@ int main()
 		case 5:
 			operacionBuscarLibro();
 			cout << "Presiona cualquier tecla para continuar...";
+			_getch();
 			break;
 		case 6:
 			operacionAgregarLibro();

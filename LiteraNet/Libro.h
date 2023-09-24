@@ -1,3 +1,5 @@
+
+
 #pragma once
 
 #include <iostream>
@@ -33,10 +35,10 @@ protected:
     }
 
 public:
-
     Libro(string codigo, string nombre, double precio) : codigo(codigo), nombre(nombre), precio(precio), head(nullptr) {}
 
     Libro() : codigo(""), nombre(""), precio(0.0), head(nullptr) {} // Constructor por defecto con inicializaciones
+
 
 
     string getCodigo() {
@@ -57,6 +59,7 @@ public:
 
     // Agregar reseña al libro
     void agregarResena(string resumen) {
+        void initializeLocale();
         Node* nuevoNodo = new Node();  // Crear nuevo nodo
         nuevoNodo->data = Review(resumen);  // Asignar datos al nuevo nodo
         nuevoNodo->next = head;  // Enlazar el nuevo nodo
@@ -65,10 +68,12 @@ public:
 
     // Obtener detalles del libro
     void obtenerDetalles() const {
-        cout << "Código: " << codigo << endl;
+        void initializeLocale();
+
+        cout << "Codigo: " << codigo << endl;
         cout << "Nombre: " << nombre << endl;
         cout << "Precio: " << precio << endl;
-        cout << "Reseñas: " << endl;
+        cout << "Resenas: " << endl;
         Node* temp = head;
         while (temp != nullptr) {
             temp->data.getReview();
