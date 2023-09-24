@@ -293,12 +293,19 @@ int main()
 
 	auto operacionMostrarLibros = []() {
 		cout << "Listado de Libros:" << endl;
-		for (int i = 0; i < lst_libro->longitud(); i++) {
-			cout << "Código del libro: " << lst_libro->obtenerPos(i)->getCodigo() << endl;
-			cout << "Nombre del libro: " << lst_libro->obtenerPos(i)->getNombre() << endl;
-			cout << "Precio del libro: " << lst_libro->obtenerPos(i)->getPrecio() << endl;
+		// Leer libros desde libros.txt y mostrarlos
+		ifstream inFile("libros.txt");
+		string line;
+
+		while (getline(inFile, line)) {
+			Libro libro = Libro::Deserializar(line);
+			cout << "Código del libro: " << libro.getCodigo() << endl;
+			cout << "Nombre del libro: " << libro.getNombre() << endl;
+			cout << "Precio del libro: " << libro.getPrecio() << endl;
 			cout << "--------------------" << endl;
 		}
+
+		inFile.close();
 		};
 
 
@@ -333,10 +340,13 @@ int main()
 			break;
 		case 7:
 			operacionMostrarLibros();
+			cout << "Presiona cualquier tecla para continuar...";
+			_getch(); // esperar a que el usuario presione tecla
 			break;
 		case 8: //
 			GuardarLibroEnArchivo();
 			cout << "Libros guardados exitosamente." << endl;
+
 			_getch();
 			break;
 		case 9: //  caso para cargar libros desde un archivo.

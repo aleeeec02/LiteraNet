@@ -5,7 +5,6 @@ D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(163,20): warning C4018: '<': no
 D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(189,20): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(223,20): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(236,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(296,21): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\Lista.h(89,27): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\Lista.h(82,45): message : al compilar la función del miembro clase plantilla "void Lista<Libro *>::agregarPos(T,uint)"
           with
