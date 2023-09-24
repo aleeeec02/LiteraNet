@@ -1,24 +1,25 @@
 ﻿  LiteraNet.cpp
 D:\literanettt\LiteraNet\LiteraNet\Pago.h(10,11): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(122,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(163,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(189,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(223,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(236,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\Lista.h(89,27): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\Lista.h(82,45): message : al compilar la función del miembro clase plantilla "void Lista<Libro *>::agregarPos(T,uint)"
-          with
-          [
-              T=Libro *
-          ]
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(291,24): message : vea la primera referencia a “Lista<Libro *>::agregarPos” en “main::<lambda_5>::operator ()”
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(30,32): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Libro *>" que se está compilando
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(128,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(170,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(198,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(238,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(261,20): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\Lista.h(152,34): message : al compilar la función del miembro clase plantilla "T Lista<T>::obtenerPos(uint)"
           with
           [
               T=Libro *
           ]
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(164,53): message : vea la primera referencia a “Lista<Libro *>::obtenerPos” en “GuardarLibroEnArchivo”
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(232): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(171,53): message : vea la primera referencia a “Lista<Libro *>::obtenerPos” en “GuardarLibroEnArchivo”
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(30,32): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Libro *>" que se está compilando
+D:\literanettt\LiteraNet\LiteraNet\Lista.h(89,27): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\Lista.h(82,45): message : al compilar la función del miembro clase plantilla "void Lista<Usuario *>::agregarPos(T,uint)"
+          with
+          [
+              T=Usuario *
+          ]
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(124,25): message : vea la primera referencia a “Lista<Usuario *>::agregarPos” en “crearUsuario2”
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(31,36): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Usuario *>" que se está compilando
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(247): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
   LiteraNet.vcxproj -> D:\literanettt\LiteraNet\x64\Debug\LiteraNet.exe

@@ -36,6 +36,9 @@ Lista<Autor*>* lst_autor = new Lista<Autor*>();
 // para entradas de datos usando lambda    //
 // ****************************************//
 
+void initializeLocale() {
+	setlocale(LC_ALL, "es_ES.UTF-8");  // aplicar tildes a todo el código
+}
 
 //Función para verificar si el username existe
 auto usernameYaExistente = make_shared<function<bool(const  string)>>(
@@ -73,6 +76,7 @@ auto crearUsuario = [](const string username, const string& codigoUsername) {
 
 auto getEdadValidada = []() -> int {
 	int edad;
+
 	while (true) {
 		cout << "Ingresar edad: ";
 		cin >> edad;
@@ -96,6 +100,8 @@ auto getEdadValidada = []() -> int {
 
 
 void crearUsuario2(int num) {
+	initializeLocale();
+
 	string nombre, apellido, correo, direccion;
 	int edad, dni;
 	cout << "------Registrar Usuario------" << endl;
@@ -126,6 +132,7 @@ void MostrarUsuarios() {
 	}
 }
 void leerArchivoAutor(vector<string>& datos) {
+
 	ifstream archivo("Autores.txt", ios::in);
 	if (!archivo.is_open())
 		cout << "No se puede abrir el archivo." << endl;
@@ -171,6 +178,8 @@ void GuardarLibroEnArchivo() {
 // Función para cargar libros desde un archivo
 
 void CargarLibrosDesdeArchivo() {
+	initializeLocale();
+
 	ifstream inFile("libros.txt"); // especificamente aquí ".\LiteraNet\LiteraNet\libros.txt"
 	string line;
 
@@ -195,6 +204,8 @@ void MostrarAutor() {
 
 //Prospecto de Menu
 int menu() {
+	initializeLocale();
+
 	int op;
 	cout << "\n";
 	cout << "----------Menu----------" << endl;
@@ -212,10 +223,14 @@ int menu() {
 	cout << "-Ingrese una opcion: ";
 	do {
 		cin >> op;
-		if (op < 0 || op > 10)
-			cout << "Ingrese una opcion valida.";
-	} while (op < 0 || op > 10);
+		if (cin.fail() || op < 1 || op > 10) {
+			cout << "Opción no válida. Por favor, ingrese una opción válida (1-10): ";
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (cin.fail() || op < 1 || op > 10);
 	return op;
+
 }
 
 //Busca un Usuario de la Lista por codigo
@@ -231,18 +246,30 @@ Usuario* buscarUsuario(string codigo) {
 	cout << "Error: Usuario No Registrado";
 }
 
-//Busca un Usuario de la Lista por codigo
-Libro* buscarLibro(string codigo) {
+
+void buscarLibroPorCodigo(string codigoli) {
+	initializeLocale();
+
+	string codigo;
+	cout << "Ingrese el código del libro que desea buscar: ";
+	cin >> codigo;
+
+	CargarLibrosDesdeArchivo();
+
+	// Buscar el libro en la lista
+	bool encontrado = false;
 	for (int i = 0; i < lst_libro->longitud(); i++) {
 		if (lst_libro->obtenerPos(i)->getCodigo() == codigo) {
-			cout << "Se encontró el Libro: " << endl;
-			cout << lst_libro->obtenerPos(i)->getCodigo() << endl;
-			cout << lst_libro->obtenerPos(i)->getNombre() << endl;
-			return lst_libro->obtenerPos(i);
+			encontrado = true;
+			cout << "Detalles del Libro:" << endl;
+			lst_libro->obtenerPos(i)->obtenerDetalles();
+			break; // Detener la búsqueda una vez encontrado
 		}
 	}
-	cout << "Error: Libro No Registrado";
-	return nullptr;
+
+	if (!encontrado) {
+		cout << "Libro no encontrado." << endl;
+	}
 }
 
 
@@ -280,15 +307,44 @@ int main()
 	auto operacionAgregarLibro = []() {
 		string codigo, nombre;
 		double precio;
+
 		cout << "Ingrese el código del libro: ";
 		cin >> codigo;
 		cout << "Ingrese el nombre del libro: ";
 		cin >> nombre;
-		cout << "Ingrese el precio del libro: ";
-		cin >> precio;
 
+		// Validación del precio para que no sea bucle infinito
+		while (true) {
+			cout << "Ingrese el precio del libro: ";
+			if (cin >> precio) {
+				break;
+			}
+			else {
+				cout << "Precio no válido. Por favor, ingrese un valor numérico válido." << endl;
+				cin.clear(); // Restaura el estado del flujo de entrada
+				cin.ignore(); // Limpia el buffer de entrada
+			}
+		}
+
+
+		// Crear nuevo objeto Libro
 		Libro* newLibro = new Libro(codigo, nombre, precio);
-		lst_libro->agregarPos(newLibro, lst_libro->longitud());
+
+		// Guardar el nuevo libro en libros.txt
+		ofstream outFile("libros.txt", ios::app); // Abrir el archivo en modo append
+		if (outFile.is_open()) {
+			outFile << newLibro->Serializar() << endl;
+			outFile.close();
+			cout << "Libro agregado exitosamente a libros.txt." << endl;
+			_getch();
+
+		}
+		else {
+			cout << "Error al abrir libros.txt. El libro no se pudo agregar." << endl;
+			_getch();
+
+		}
+
 		};
 
 	auto operacionMostrarLibros = []() {
@@ -309,11 +365,14 @@ int main()
 		};
 
 
-	auto operacionBuscarLibro = [&codigoli]() { // Usando codigoli
-		cout << "Ingrese el codigo del libro: ";
+	auto operacionBuscarLibro = []() {
+
+		string codigoli;
+		cout << "Ingrese el código del libro que desea buscar: ";
 		cin >> codigoli;
-		buscarLibro(codigoli);
+		buscarLibroPorCodigo(codigoli);
 		};
+
 
 	do {
 		system("cls");
@@ -334,9 +393,11 @@ int main()
 			break;
 		case 5:
 			operacionBuscarLibro();
+			cout << "Presiona cualquier tecla para continuar...";
 			break;
 		case 6:
 			operacionAgregarLibro();
+			cout << "Presiona cualquier tecla para continuar...";
 			break;
 		case 7:
 			operacionMostrarLibros();
