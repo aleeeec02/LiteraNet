@@ -23,6 +23,7 @@
 #include <locale>
 #include <Windows.h>
 
+
 using namespace std;
 
 
@@ -204,6 +205,7 @@ void MostrarAutor() {
 	}
 }
 
+
 // Función para agregar colores al texo desde Windows.h
 void setColor(int color) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
@@ -218,6 +220,9 @@ int menu() {
 	const int Default = 7;
 
 	// menú opciones
+	//Prospecto de Menu
+	initializeLocale();
+
 	int op;
 	cout << "\n";
 	cout << "----------Menu----------" << endl;
@@ -232,15 +237,18 @@ int menu() {
 	cout << "9. Cargar Libros desde Archivo." << endl;
 	cout << "10. Salir." << endl;  //exit
 
+
 	setColor(Blue);
 	cout << "Ingrese una opcion: ";
 	setColor(Default);
+
 
 	do {
 		cin >> op;
 		if (cin.fail() || op < 1 || op > 10) {
 			cout << "Opción no válida. Por favor, ingrese una opción válida (1-10): ";
 			cin.clear();
+
 			cin.ignore();
 		}
 	} while (cin.fail() || op < 1 || op > 10);
@@ -290,15 +298,13 @@ void buscarLibroPorCodigo(string codigoli) {
 
 int main()
 {
+
 	//Apariencia: validación de tildes y colores
 	initializeLocale();
 	const int Blue = 9; // Color Azul
 	const int Default = 7; // Color predeterminado
 
-
-
-
-
+	initializeLocale();
 	vector<string> datos;
 	string codigous, codigoli;
 	int num = 0, op;
