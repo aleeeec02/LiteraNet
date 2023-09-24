@@ -1,6 +1,0 @@
-ESP001,La Ilíada,14.99,La gran epopeya de la antigua Grecia.
-ESP002,La Odisea,15.99,El épico viaje de Ulises en la antigua Grecia.
-ESP003,El Señor de los Anillos,18.50,La obra maestra de fantasía de J.R.R. Tolkien.
-ESP004,La Divina Comedia,12.75,Dante explora el infierno en su obra maestra.
-Recetas,lib334,45
-Recetas,lib502,78

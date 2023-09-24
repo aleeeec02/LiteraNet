@@ -6,7 +6,6 @@
 #include "Autor.h"
 #include "Review.h"
 
-
 #include "Pago.h"
 #include "Libro.h"
 #include "Reserva.h"
@@ -23,6 +22,8 @@
 
 #include <locale>
 #include <Windows.h>
+
+using namespace std;
 
 
 //Colecciones
@@ -203,10 +204,20 @@ void MostrarAutor() {
 	}
 }
 
+// Función para agregar colores al texo desde Windows.h
+void setColor(int color) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
 //Prospecto de Menu
 int menu() {
-	initializeLocale();
 
+	// estética del menú
+
+	const int Blue = 9;
+	const int Default = 7;
+
+	// menú opciones
 	int op;
 	cout << "\n";
 	cout << "----------Menu----------" << endl;
@@ -221,13 +232,16 @@ int menu() {
 	cout << "9. Cargar Libros desde Archivo." << endl;
 	cout << "10. Salir." << endl;  //exit
 
-	cout << "-Ingrese una opcion: ";
+	setColor(Blue);
+	cout << "Ingrese una opcion: ";
+	setColor(Default);
+
 	do {
 		cin >> op;
 		if (cin.fail() || op < 1 || op > 10) {
 			cout << "Opción no válida. Por favor, ingrese una opción válida (1-10): ";
 			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin.ignore();
 		}
 	} while (cin.fail() || op < 1 || op > 10);
 	return op;
@@ -276,8 +290,15 @@ void buscarLibroPorCodigo(string codigoli) {
 
 int main()
 {
-	//Validación de tildes SPA
+	//Apariencia: validación de tildes y colores
 	initializeLocale();
+	const int Blue = 9; // Color Azul
+	const int Default = 7; // Color predeterminado
+
+
+
+
+
 	vector<string> datos;
 	string codigous, codigoli;
 	int num = 0, op;
