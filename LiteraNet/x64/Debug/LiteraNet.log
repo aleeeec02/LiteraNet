@@ -1,10 +1,11 @@
 ﻿  LiteraNet.cpp
-D:\literanettt\LiteraNet\LiteraNet\Pago.h(10,11): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+D:\literanettt\LiteraNet\LiteraNet\Pago.h(1,13): warning C4081: se esperaba 'newline'; se encontró ';'
+D:\literanettt\LiteraNet\LiteraNet\Pago.h(11,11): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
 D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(131,20): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(173,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(201,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(261,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(284,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(200,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(260,20): warning C4018: '<': no coinciden signed/unsigned
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(283,20): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': no coinciden signed/unsigned
 D:\literanettt\LiteraNet\LiteraNet\Lista.h(152,34): message : al compilar la función del miembro clase plantilla "T Lista<T>::obtenerPos(uint)"
           with
@@ -21,5 +22,5 @@ D:\literanettt\LiteraNet\LiteraNet\Lista.h(82,45): message : al compilar la func
           ]
 D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(127,25): message : vea la primera referencia a “Lista<Usuario *>::agregarPos” en “crearUsuario2”
 D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(34,36): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Usuario *>" que se está compilando
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(270): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
+D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(269): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
   LiteraNet.vcxproj -> D:\literanettt\LiteraNet\x64\Debug\LiteraNet.exe

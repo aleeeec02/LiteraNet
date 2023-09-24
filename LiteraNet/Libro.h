@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include <iostream>
@@ -17,88 +15,96 @@ struct Node {
 
 class Libro {
 protected:
-    // inicializando
     string codigo = "";
     string nombre = "";
     double precio = 0.0;
-
     Node* head = nullptr;
     bool libroExistente = false;
-
 
     void setLibroExistente(bool existente) {
         libroExistente = existente;
     }
 
-    bool getlibroExistente()const {
+    bool getLibroExistente() const {
         return libroExistente;
     }
 
 public:
+    // Constructors
     Libro(string codigo, string nombre, double precio) : codigo(codigo), nombre(nombre), precio(precio), head(nullptr) {}
 
-    Libro() : codigo(""), nombre(""), precio(0.0), head(nullptr) {} // Constructor por defecto con inicializaciones
+    Libro() : codigo(""), nombre(""), precio(0.0), head(nullptr) {} 
 
-
-
+    // Getters and Setters
     string getCodigo() {
         return codigo;
     }
+
     string getNombre() {
         return nombre;
     }
 
-    // Obtener precio del libro
     double getPrecio() const {
         return precio;
     }
-    // Cambiar precio del libro
+
     void cambiarPrecio(double nuevoPrecio) {
         precio = nuevoPrecio;
     }
 
-    // Agregar reseña al libro
+    // Methods
     void agregarResena(string resumen) {
-        void initializeLocale();
-        Node* nuevoNodo = new Node();  // Crear nuevo nodo
-        nuevoNodo->data = Review(resumen);  // Asignar datos al nuevo nodo
-        nuevoNodo->next = head;  // Enlazar el nuevo nodo
+        Node* nuevoNodo = new Node();  
+        nuevoNodo->data = Review(resumen);  
+        nuevoNodo->next = head;  
         head = nuevoNodo;
     }
 
-    // Obtener detalles del libro
     void obtenerDetalles() const {
-        void initializeLocale();
-
         cout << "Codigo: " << codigo << endl;
         cout << "Nombre: " << nombre << endl;
         cout << "Precio: " << precio << endl;
-        cout << "Resenas: " << endl;
-        Node* temp = head;
-        while (temp != nullptr) {
-            temp->data.getReview();
-            temp = temp->next;
+
+        cout << "¿Desea comprar este libro? (y/n): ";
+
+
+        if (head == nullptr) {
+            cout << "No hay reseñas disponibles." << endl;
+        }
+        else {
+            Node* temp = head;
+            while (temp != nullptr) {
+                temp->data.printReview();
+                temp = temp->next;
+            }
         }
     }
+
+
+
     void guardarLibro(const string& archivo) {
-        ofstream outFile(archivo, ios::app); // Abrir archivo en modo append (añadir al final)
+        ofstream outFile(archivo, ios::app);
         if (outFile.is_open()) {
             outFile << codigo << "," << nombre << "," << precio << ",";
 
-            Node* temp = head;
-            while (temp != nullptr) {
-                outFile << temp->next;
-                if (temp != nullptr) {
-                    outFile << "|"; // separador
+            if (head == nullptr) {
+                cout << "No hay reseñas disponibles." << endl;
+            }
+            else {
+                Node* temp = head;
+                while (temp != nullptr) {
+                    temp->data.printReview();
+                    temp = temp->next;
                 }
             }
+
             outFile << endl;
             outFile.close();
         }
     }
 
     void cargarLibro(const string& archivo, const string& codigoLibro) {
-        ifstream inFile(archivo); // Abrir archivo en modo lectura
+        ifstream inFile(archivo);
         if (inFile.is_open()) {
             string line;
             while (getline(inFile, line)) {
@@ -106,13 +112,11 @@ public:
                 string token;
                 getline(iss, token, ',');
                 if (token == codigoLibro) {
-                    // llenar los datos del libro
                     codigo = token;
                     getline(iss, nombre, ',');
                     getline(iss, token, ',');
                     precio = stod(token);
 
-                    // llenar las reseñas
                     while (getline(iss, token, '|')) {
                         agregarResena(token);
                     }
@@ -123,30 +127,33 @@ public:
         }
     }
 
-
-    //Serializacion
     string Serializar() const {
         stringstream ss;
         ss << nombre << "," << codigo << "," << precio;
         return ss.str();
     }
 
-    //Deserializacion
     static Libro Deserializar(const string& str) {
         stringstream ss(str);
-        string nombre, genero, codigo, temp;
+        string nombre, codigo, temp, reviews_str;
         double precio;
+
         getline(ss, nombre, ',');
         getline(ss, codigo, ',');
         getline(ss, temp, ',');
         precio = stod(temp);
-        getline(ss, temp, ',');
+        getline(ss, reviews_str, ',');
 
-        return Libro(nombre, codigo, precio);
+        Libro libro(nombre, codigo, precio);
+
+        stringstream reviews_ss(reviews_str);
+        while (getline(reviews_ss, temp, '|')) {
+            libro.agregarResena(temp);
+        }
+
+        return libro;
     }
 
-
-    // Destructor de libro para liberar memoria
     ~Libro() {
         while (head != nullptr) {
             Node* temp = head;

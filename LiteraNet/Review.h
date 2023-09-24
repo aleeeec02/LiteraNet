@@ -1,14 +1,19 @@
 #pragma once
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 class Review {
-	string resumen;
+private:
+    string resumen;
+
 public:
-	Review(string resumen) { this->resumen = resumen; }
-	Review(){}
-	void getReview() {
-		cout << resumen << endl;
-	}
+    Review(string resumen) : resumen(resumen) {}  // Inicialización con lista de inicializadores
+    Review() : resumen("") {}  // Constructor predeterminado
+
+    string printReview() {
+        return resumen;
+    }
+
 };

@@ -87,11 +87,11 @@ auto getEdadValidada = []() -> int {
 		if (cin.fail()) {
 			cin.clear(); // borrar el búfer de entrada para restaurar cin a un estado utilizable
 			cin.ignore(INT_MAX, '\n'); // ignorar la última entrada si cin.fail es true
-			cout << "Por favor, ingrese un número válido para la edad." << endl;
+			cout << "Por favor, ingrese un numero valido para la edad." << endl;
 		}
 		else if (edad < 0 || edad > 120)
 		{
-			cout << "Por favor, ingrese una edad válida (0-120)." << endl;
+			cout << "Por favor, ingrese una edad valida (0-120)." << endl;
 		}
 		else 
 		{
@@ -188,8 +188,7 @@ void CargarLibrosDesdeArchivo() {
 
 	while (getline(inFile, line)) {
 		Libro libro = Libro::Deserializar(line);
-		// Add this libro object to your list
-		// Assuming lst_libro is your list of Libros
+
 		lst_libro->agregar(&libro);  
 	}
 
@@ -219,9 +218,10 @@ int menu() {
 	const int Blue = 9;
 	const int Default = 7;
 
+	initializeLocale();
+
 	// menú opciones
 	//Prospecto de Menu
-	initializeLocale();
 
 	int op;
 	cout << "\n";
@@ -233,9 +233,8 @@ int menu() {
 	cout << "5. Buscar Libro." << endl;
 	cout << "6. Agregar Libro." << endl;
 	cout << "7. Mostrar Libros." << endl;
-	cout << "8. Guardar Libros al Archivo." << endl;
-	cout << "9. Cargar Libros desde Archivo." << endl;
-	cout << "10. Salir." << endl;  //exit
+	cout << "8. Comprar Libros." << endl;
+	cout << "9. Salir." << endl;  //exit
 
 
 	setColor(Blue);
@@ -245,13 +244,13 @@ int menu() {
 
 	do {
 		cin >> op;
-		if (cin.fail() || op < 1 || op > 10) {
-			cout << "Opción no válida. Por favor, ingrese una opción válida (1-10): ";
+		if (cin.fail() || op < 1 || op > 9) {
+			cout << "Opcion no valida. Por favor, ingrese una opcion valida (1-9): ";
 			cin.clear();
 
 			cin.ignore();
 		}
-	} while (cin.fail() || op < 1 || op > 10);
+	} while (cin.fail() || op < 1 || op > 9);
 	return op;
 
 }
@@ -260,7 +259,7 @@ int menu() {
 Usuario* buscarUsuario(string codigo) {
 	for (int i = 0; i < lst_usuario->longitud(); i++) {
 		if (lst_usuario->obtenerPos(i)->getCodigo() == codigo) {
-			cout << "Se encontró el Usuario: " << endl;
+			cout << "Se encontro el Usuario: " << endl;
 			cout << lst_usuario->obtenerPos(i)->getCodigo() << endl;
 			cout << lst_usuario->obtenerPos(i)->getNombre() << endl;
 			return lst_usuario->obtenerPos(i);
@@ -296,6 +295,64 @@ void buscarLibroPorCodigo(string codigoli) {
 }
 
 
+#include "Libro.h" // Asumiendo que tu clase Libro está en Libro.h
+#include "Pago.h"  // Asumiendo que tu clase Pago está en Pago.h
+
+// Otras declaraciones y código previos (como las otras operaciones del menú)...
+
+auto operacionComprarLibros = []() {
+	string codigo;
+	cout << "Ingrese el codigo del libro que desea comprar: ";
+	cin >> codigo;
+
+	// Buscar libro por código
+	ifstream inFile("libros.txt");
+	string line;
+	bool found = false;
+
+	while (getline(inFile, line)) {
+		Libro libro = Libro::Deserializar(line);
+		if (libro.getCodigo() == codigo) {
+			found = true;
+
+			// Mostrar detalles del libro
+			libro.obtenerDetalles();
+
+			// Confirmar compra
+			cout << "¿Desea comprar este libro? (y/n): ";
+			char confirm;
+
+			cin >> confirm;
+
+			if (tolower(confirm) == 'y') {
+				// Realizar el pago aquí usando la clase Pago
+				Pago pago(libro.getPrecio(), Efectivo, Soles);
+
+				if (pago.procesarPago()) {
+					cout << "Compra exitosa. Gracias por comprar con nosotros." << endl;
+				}
+				else {
+					cout << "Compra fallida. Por favor, intente de nuevo más tarde." << endl;
+				}
+			}
+			else {
+				cout << "Compra cancelada." << endl;
+			}
+
+			break;
+		}
+	}
+
+	inFile.close();
+
+	if (!found) {
+		cout << "Libro no encontrado." << endl;
+	}
+};
+
+
+
+
 int main()
 {
 
@@ -304,7 +361,7 @@ int main()
 	const int Blue = 9; // Color Azul
 	const int Default = 7; // Color predeterminado
 
-	initializeLocale();
+
 	vector<string> datos;
 	string codigous, codigoli;
 	int num = 0, op;
@@ -320,7 +377,7 @@ int main()
 		};
 
 	auto operacionBuscarUsuario = [&codigous]() { // Usando codigous
-		cout << "Ingrese el código del usuario: ";
+		cout << "Ingrese el codigo del usuario: ";
 		cin >> codigous;
 		buscarUsuario(codigous);
 		_getch();
@@ -336,7 +393,7 @@ int main()
 		string codigo, nombre;
 		double precio;
 
-		cout << "Ingrese el código del libro: ";
+		cout << "Ingrese el codigo del libro: ";
 		cin >> codigo;
 		cout << "Ingrese el nombre del libro: ";
 		cin >> nombre;
@@ -453,26 +510,23 @@ int main()
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch(); // esperar a que el usuario presione tecla
 			break;
-		case 8: //
-			GuardarLibroEnArchivo();
-			cout << "Libros guardados exitosamente." << endl;
 
+		case 8:
+			operacionMostrarLibros();
+			operacionComprarLibros();
+			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
 			break;
-		case 9: //  caso para cargar libros desde un archivo.
-			CargarLibrosDesdeArchivo();
-			cout << "Libros cargados exitosamente." << endl;
-			_getch();
-			break;
-		case 10: // Exit Option
+
+		case 9: // Exit Option
 			cout << "Hasta luego, gracias por usar nuestro servicio.";
 			_getch();
 			exit(0);
 		default:
-			cout << "Opción no válida. Por favor, intente de nuevo.\n";
+			cout << "Opcion no válida. Por favor, intente de nuevo.\n";
 			break;
 		}
-	} while (op != 10);
+	} while (op != 0);
 
 
 	return 0;

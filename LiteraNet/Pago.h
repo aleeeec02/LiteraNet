@@ -1,3 +1,4 @@
+#pragma once;
 #include <iostream>
 #include <string>
 using namespace std;
@@ -6,7 +7,7 @@ enum MetodoPago { Efectivo, Tarjeta };
 enum Moneda { Soles, Dolares };
 
 // Función para validar una tarjeta de crédito usando el algoritmo de Luhn (Algoritmo de Luhn)
-bool validarTarjeta(string numero) {
+inline bool validarTarjeta(string numero) {
     int n = numero.length();
     int suma = 0;
     bool alterna = false;
@@ -32,6 +33,7 @@ private:
     MetodoPago metodo;
     Moneda moneda;
     string numeroTarjeta;
+
 public:
     Pago(double monto, MetodoPago metodo, Moneda moneda, string numeroTarjeta = "")
         : monto(monto), metodo(metodo), moneda(moneda), numeroTarjeta(numeroTarjeta) {}
