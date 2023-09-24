@@ -14,7 +14,7 @@
 #include "Lista.h"
 #include "Cola.h"
 
-#include <conio.h>
+#include <conio.h> // para utilizar getch
 #include <vector>
 
 #include <string>
@@ -70,6 +70,31 @@ auto crearUsuario = [](const string username, const string& codigoUsername) {
 	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'añadir')
 	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (añadir una coma para facilitar el análisis más tarde)
 };
+
+auto getEdadValidada = []() -> int {
+	int edad;
+	while (true) {
+		cout << "Ingresar edad: ";
+		cin >> edad;
+
+		if (cin.fail()) {
+			cin.clear(); // borrar el búfer de entrada para restaurar cin a un estado utilizable
+			cin.ignore(INT_MAX, '\n'); // ignorar la última entrada si cin.fail es true
+			cout << "Por favor, ingrese un número válido para la edad." << endl;
+		}
+		else if (edad < 0 || edad > 120)
+		{
+			cout << "Por favor, ingrese una edad válida (0-120)." << endl;
+		}
+		else 
+		{
+			cin.ignore();
+			return edad; // good input
+		}
+	}
+};
+
+
 void crearUsuario2(int num) {
 	string nombre, apellido, correo, direccion;
 	int edad, dni;
@@ -78,6 +103,9 @@ void crearUsuario2(int num) {
 	cin >> nombre;
 	cout << "Ingresar apellido: ";
 	cin >> apellido;
+
+	edad = getEdadValidada();
+
 	cout << "Ingresar edad: ";
 	cin >> edad;
 	cout << "Ingresar correo: ";
@@ -89,6 +117,7 @@ void crearUsuario2(int num) {
 	Usuario* user = new Usuario(nombre, apellido, edad, dni, correo, direccion);
 	lst_usuario->agregarPos(user, num);
 }
+
 void MostrarUsuarios() {
 	for (int i = 0; i < lst_usuario->longitud(); i++) {
 		cout << "Codigo del usuario: " << lst_usuario->obtenerPos(i)->getUserID();
@@ -190,39 +219,65 @@ int main()
 	vector<string> datos;
 	string codigous, codigoli;
 	int num = 0, op;
+
+	auto operacionRegistrarUsuario = [&num]() {
+		crearUsuario2(num);
+		num++;
+		};
+
+	auto operacionMostrarUsuarios = []() {
+		MostrarUsuarios();
+		_getch();
+		};
+
+	auto operacionBuscarUsuario = [&codigous]() { // Usando codigous
+		cout << "Ingrese el codigo del usuario: ";
+		cin >> codigous;
+		buscarUsuario(codigous);
+		_getch();
+		};
+
+	auto operacionMostrarAutor = [&datos]() { // Usando datos
+		leerArchivoAutor(datos);
+		RegistrarAutor(datos);
+		MostrarAutor();
+		_getch();
+		};
+
+	auto operacionBuscarLibro = [&codigoli]() { // Usando codigoli
+		cout << "Ingrese el codigo del libro: ";
+		cin >> codigoli;
+		buscarLibro(codigoli);
+		};
+
 	do {
 		system("cls");
 		op = menu();
-		if (op == 5) {
-			cout << "Adios." << endl;
-			break;
-		}
+
 		switch (op) {
-		case 1:crearUsuario2(num);
-			num++;
+		case 1:
+			operacionRegistrarUsuario();
 			break;
-		case 2: MostrarUsuarios();
-			_getch();
+		case 2:
+			operacionMostrarUsuarios();
 			break;
 		case 3:
-			cout << "Ingrese el codigo del usuario: ";
-			cin >> codigous;
-			buscarUsuario(codigous);
-			_getch();
+			operacionBuscarUsuario();
 			break;
-		case 4: leerArchivoAutor(datos);
-			RegistrarAutor(datos);
-			MostrarAutor();
-			_getch();
+		case 4:
+			operacionMostrarAutor();
 			break;
 		case 5:
-			cout << "Ingrese el codigo del libro: ";
-			cin >> codigoli;
-			buscarLibro(codigoli);
+			operacionBuscarLibro();
+			break;
 		case 6:
 			cout << "Adios";
 			break;
+		default:
+			cout << "Opción no válida. Por favor, intente de nuevo.\n";
+			break;
 		}
 	} while (op != 6);
+
 	return 0;
 }
