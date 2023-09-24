@@ -156,6 +156,35 @@ void RegistrarAutor(vector<string>& datos) {
 	}
 }
 
+
+// Función para guardar libros en un archivo
+void GuardarLibroEnArchivo() {
+	ofstream outFile("libros.txt");
+	for (int i = 0; i < lst_libro->longitud(); i++) {
+		outFile << lst_libro->obtenerPos(i)->Serializar() << endl;
+	}
+	outFile.close();
+
+}
+
+
+// Función para cargar libros desde un archivo
+
+void CargarLibrosDesdeArchivo() {
+	ifstream inFile("libros.txt"); // especificamente aquí ".\LiteraNet\LiteraNet\libros.txt"
+	string line;
+
+	while (getline(inFile, line)) {
+		Libro libro = Libro::Deserializar(line);
+		// Add this libro object to your list
+		// Assuming lst_libro is your list of Libros
+		lst_libro->agregar(&libro);  
+	}
+
+	inFile.close();
+}
+
+
 void MostrarAutor() {
 	for (int i = 0; i < lst_autor->longitud(); i++) {
 		cout << "\n-----Autor: " << i + 1 << "-----" << endl;
@@ -174,13 +203,18 @@ int menu() {
 	cout << "3. Buscar Usuario." << endl;
 	cout << "4. Mostrar autores." << endl;
 	cout << "5. Buscar Libro." << endl;
-	cout << "6. Salir." << endl;
+	cout << "6. Agregar Libro." << endl;
+	cout << "7. Mostrar Libros." << endl;
+	cout << "8. Guardar Libros al Archivo." << endl;
+	cout << "9. Cargar Libros desde Archivo." << endl;
+	cout << "10. Salir." << endl;  //exit
+
 	cout << "-Ingrese una opcion: ";
 	do {
 		cin >> op;
-		if (op < 0 || op > 6)
+		if (op < 0 || op > 10)
 			cout << "Ingrese una opcion valida.";
-	} while (op < 0 || op>6);
+	} while (op < 0 || op > 10);
 	return op;
 }
 
@@ -231,7 +265,7 @@ int main()
 		};
 
 	auto operacionBuscarUsuario = [&codigous]() { // Usando codigous
-		cout << "Ingrese el codigo del usuario: ";
+		cout << "Ingrese el código del usuario: ";
 		cin >> codigous;
 		buscarUsuario(codigous);
 		_getch();
@@ -243,6 +277,30 @@ int main()
 		MostrarAutor();
 		_getch();
 		};
+	auto operacionAgregarLibro = []() {
+		string codigo, nombre;
+		double precio;
+		cout << "Ingrese el código del libro: ";
+		cin >> codigo;
+		cout << "Ingrese el nombre del libro: ";
+		cin >> nombre;
+		cout << "Ingrese el precio del libro: ";
+		cin >> precio;
+
+		Libro* newLibro = new Libro(codigo, nombre, precio);
+		lst_libro->agregarPos(newLibro, lst_libro->longitud());
+		};
+
+	auto operacionMostrarLibros = []() {
+		cout << "Listado de Libros:" << endl;
+		for (int i = 0; i < lst_libro->longitud(); i++) {
+			cout << "Código del libro: " << lst_libro->obtenerPos(i)->getCodigo() << endl;
+			cout << "Nombre del libro: " << lst_libro->obtenerPos(i)->getNombre() << endl;
+			cout << "Precio del libro: " << lst_libro->obtenerPos(i)->getPrecio() << endl;
+			cout << "--------------------" << endl;
+		}
+		};
+
 
 	auto operacionBuscarLibro = [&codigoli]() { // Usando codigoli
 		cout << "Ingrese el codigo del libro: ";
@@ -271,13 +329,31 @@ int main()
 			operacionBuscarLibro();
 			break;
 		case 6:
-			cout << "Adios";
+			operacionAgregarLibro();
 			break;
+		case 7:
+			operacionMostrarLibros();
+			break;
+		case 8: //
+			GuardarLibroEnArchivo();
+			cout << "Libros guardados exitosamente." << endl;
+			_getch();
+			break;
+		case 9: //  caso para cargar libros desde un archivo.
+			CargarLibrosDesdeArchivo();
+			cout << "Libros cargados exitosamente." << endl;
+			_getch();
+			break;
+		case 10: // Exit Option
+			cout << "Hasta luego, gracias por usar nuestro servicio.";
+			_getch();
+			exit(0);
 		default:
 			cout << "Opción no válida. Por favor, intente de nuevo.\n";
 			break;
 		}
-	} while (op != 6);
+	} while (op != 10);
+
 
 	return 0;
 }

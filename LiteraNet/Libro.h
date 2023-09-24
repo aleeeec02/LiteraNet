@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 #include "Review.h"
 
 using namespace std;
@@ -17,6 +19,7 @@ protected:
     string codigo = "";
     string nombre = "";
     double precio = 0.0;
+
     Node* head = nullptr;
     bool libroExistente = false;
 
@@ -72,6 +75,71 @@ public:
             temp = temp->next;
         }
     }
+    void guardarLibro(const string& archivo) {
+        ofstream outFile(archivo, ios::app); // Abrir archivo en modo append (añadir al final)
+        if (outFile.is_open()) {
+            outFile << codigo << "," << nombre << "," << precio << ",";
+
+            Node* temp = head;
+            while (temp != nullptr) {
+                outFile << temp->next;
+                if (temp != nullptr) {
+                    outFile << "|"; // separador
+                }
+            }
+            outFile << endl;
+            outFile.close();
+        }
+    }
+
+    void cargarLibro(const string& archivo, const string& codigoLibro) {
+        ifstream inFile(archivo); // Abrir archivo en modo lectura
+        if (inFile.is_open()) {
+            string line;
+            while (getline(inFile, line)) {
+                istringstream iss(line);
+                string token;
+                getline(iss, token, ',');
+                if (token == codigoLibro) {
+                    // llenar los datos del libro
+                    codigo = token;
+                    getline(iss, nombre, ',');
+                    getline(iss, token, ',');
+                    precio = stod(token);
+
+                    // llenar las reseñas
+                    while (getline(iss, token, '|')) {
+                        agregarResena(token);
+                    }
+                    break;
+                }
+            }
+            inFile.close();
+        }
+    }
+
+
+    //Serializacion
+    string Serializar() const {
+        stringstream ss;
+        ss << nombre << "," << codigo << "," << precio;
+        return ss.str();
+    }
+
+    //Deserializacion
+    static Libro Deserializar(const string& str) {
+        stringstream ss(str);
+        string nombre, genero, codigo, temp;
+        double precio;
+        getline(ss, nombre, ',');
+        getline(ss, codigo, ',');
+        getline(ss, temp, ',');
+        precio = stod(temp);
+        getline(ss, temp, ',');
+
+        return Libro(nombre, codigo, precio);
+    }
+
 
     // Destructor de libro para liberar memoria
     ~Libro() {
