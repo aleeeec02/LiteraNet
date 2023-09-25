@@ -7,25 +7,19 @@
 using namespace std;
 
 class Reserva {
-	string fechaReserva;
 	Libro* libro;
 	Usuario* usuario;
 
 public:
 	//Constructor con parametros
 	Reserva(Usuario* user, Libro* lib):usuario(user), libro(lib) { 
-		this->fechaReserva = "01/10/23";
-//		this->usuario = user; this->libro = lib; 
 	}
 
-	Reserva() : usuario(nullptr), libro(nullptr), fechaReserva("") {};
+	Reserva() : usuario(nullptr), libro(nullptr){};
 
 	void generarReserva(Usuario* user, Libro* lib) {
 		this->usuario = user;
 		this->libro = lib;
-	}
-	void getReserva() {
-		cout << fechaReserva;
 	}
 	void addLibro(Libro *lib) {
 		this->libro = lib;
@@ -45,8 +39,7 @@ public:
 		cout << "*************** DETALLES DE RESERVA ******************"<<endl;
 		cout << "Libro: "<< this->libro->getNombre() << endl;
 		cout << "Reservado por : " << this->usuario->getNombre() << endl;
-		cout << "Código de Usuario : " << this->usuario->getCodigo() << endl;
-		cout << "Código de Libro: " << this->libro->getCodigo() << endl;
-		cout << "Fecha de Reserva: " << this->fechaReserva << endl;
+		cout << "Codigo de Usuario : " << this->usuario->getCodigo() << endl;
+		cout << "Codigo de Libro: " << this->libro->getCodigo() << endl;
 	}
 };

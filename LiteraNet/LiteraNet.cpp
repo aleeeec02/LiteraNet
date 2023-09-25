@@ -22,6 +22,7 @@
 
 #include <locale>
 #include <Windows.h>
+#define MAX_COMMENT_LEN 100
 
 
 using namespace std;
@@ -234,8 +235,9 @@ int menu() {
 	cout << "8. Guardar Libros al Archivo." << endl;
 	cout << "9. Cargar Libros desde Archivo." << endl;
 	cout << "10. Reservar Libro." << endl;  //exit
-	cout << "11. Agregar Review." << endl;  //exit
-	cout << "12. Salir." << endl;  //exit
+	cout << "11. Mostrar Reservas." << endl;  //exit
+	cout << "12. Agregar Review." << endl;  //exit
+	cout << "13. Salir." << endl;  //exit
 
 
 	setColor(Blue);
@@ -245,13 +247,13 @@ int menu() {
 
 	do {
 		cin >> op;
-		if (cin.fail() || op < 1 || op > 11) {
-			cout << "Opción no válida. Por favor, ingrese una opción válida (1-11): ";
+		if (cin.fail() || op < 1 || op > 13) {
+			cout << "Opción no válida. Por favor, ingrese una opción válida (1-12): ";
 			cin.clear();
 
 			cin.ignore();
 		}
-	} while (cin.fail() || op < 1 || op > 11);
+	} while (cin.fail() || op < 1 || op > 13);
 	return op;
 
 }
@@ -260,24 +262,23 @@ int menu() {
 Usuario* buscarUsuario(string codigo) {
 	for (int i = 0; i < lst_usuario->longitud(); i++) {
 		if (lst_usuario->obtenerPos(i)->getCodigo() == codigo) {
-			cout << "Se encontró el Usuario: " << endl;
-			cout << lst_usuario->obtenerPos(i)->getCodigo() << endl;
-			cout << lst_usuario->obtenerPos(i)->getNombre() << endl;
 			return lst_usuario->obtenerPos(i);
 		}
 	}
 	cout << "Error: Usuario No Registrado";
 }
 
-Libro buscarLibro(string codigo) {
+Libro* buscarLibro(string codigo) {
 	ifstream inFile("libros.txt"); // Recibe datos de libros.txt
 	string line;
 	bool found = false;
+	Libro* auxLib;
 	while (getline(inFile, line)) {
 		Libro libro = Libro::Deserializar(line);
 		if (libro.getCodigo() == codigo) {
 			found = true;
-			return libro;
+			auxLib = new Libro(libro.getCodigo(), libro.getNombre(), libro.getPrecio());
+			return auxLib;
 		}
 	}
 
@@ -435,22 +436,49 @@ int main()
 		if (!found) {
 			cout << "Libro no encontrado." << endl;
 		}
-		};
-
+	};
+	//RESERVA FUNCION
 	auto reservarLibro = []() {
 		initializeLocale();
 		Usuario* usuarioExistente;
-		Libro libroExistente;
+		Libro* libroExistente;
 		string codUser, codLibro;
-		Reserva reserva;
+		Reserva* reserva;
 		cout << "Ingrese su codigo de usuario: "; cin >> codUser;
 		cout << "Ingrese codigo del libro: "; cin >> codLibro;
 		usuarioExistente = buscarUsuario(codUser);
 		libroExistente = buscarLibro(codLibro);
-		reserva.generarReserva(usuarioExistente, &libroExistente);
-		reserva.mostrarDetallesReserva();
+		reserva = new Reserva(usuarioExistente, libroExistente);
+		reserva->mostrarDetallesReserva();
+		cola_reserva->encolar(reserva);
 	};
-	//6EEN6148
+
+	auto mostrarReservas = []() {
+		Reserva *reserva_uni;
+
+		do {
+			reserva_uni = cola_reserva->desencolar();
+			reserva_uni->mostrarDetallesReserva();
+		} while (!cola_reserva->esVacia());
+	};
+
+	auto agregarReview = []() {
+		Review* review;
+		Libro* libroRev;
+		string comment,codeLibro;
+		cout <<endl<< "********* Agregar Review ***********" << endl;;
+		cout << "Ingrese Codigo del libro: "; cin >> codeLibro;
+		libroRev = buscarLibro(codeLibro);
+		libroRev->obtenerDetalles();
+		cin.ignore();
+		cout << "Agregar un comentario para el libro: " << endl;
+		getline(cin, comment);
+		libroRev->agregarResena(comment);
+		libroRev->obtenerDetalles();
+	};
+
+	//KI300DLP
+
 	do {
 		system("cls");
 		op = menu();
@@ -482,7 +510,7 @@ int main()
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch(); // esperar a que el usuario presione tecla
 			break;
-		case 8: //
+		case 8: // KT15MYE9
 			GuardarLibroEnArchivo();
 			cout << "Libros guardados exitosamente." << endl;
 
@@ -495,10 +523,20 @@ int main()
 			break;
 		case 10: // Reservar Libro
 			reservarLibro();
+			cout << "Presiona cualquier tecla para continuar...";
+			_getch();
 			break;
-		case 11: // Agregar REserña
-			cout << " Agregar Review.";
-		case 12: // Exit Option
+		case 11: // Mostrar Reservas
+			mostrarReservas();
+			cout << "Presiona cualquier tecla para continuar...";
+			_getch();
+			break;
+		case 12: // Agregar Reseñas
+			agregarReview();
+			cout << "Presiona cualquier tecla para continuar...";
+			_getch();
+			break;
+		case 13: // Exit Option
 			cout << "Hasta luego, gracias por usar nuestro servicio.";
 			_getch();
 			exit(0);
@@ -506,7 +544,7 @@ int main()
 			cout << "Opción no válida. Por favor, intente de nuevo.\n";
 			break;
 		}
-	} while (op != 10);
+	} while (op != 13);
 
 
 	return 0;
