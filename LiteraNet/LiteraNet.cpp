@@ -40,19 +40,19 @@ Lista<Autor*>* lst_autor = new Lista<Autor*>();
 // ****************************************//
 
 void initializeLocale() {
-	setlocale(LC_ALL, "es_ES.UTF-8");  // aplicar tildes a todo el código
+	setlocale(LC_ALL, "es_ES.UTF-8");  // aplicar tildes a todo el cï¿½digo
 }
 
-//Función para verificar si el username existe
+//Funciï¿½n para verificar si el username existe
 auto usernameYaExistente = make_shared<function<bool(const  string)>>(
 	[](const string& username) -> bool {
 
 	ifstream archivoEntrada("usernames.txt");
 	string linea;
 
-	//Lee cada línea del archivo
+	//Lee cada lï¿½nea del archivo
 	while (getline(archivoEntrada, linea)) {
-		istringstream iss(linea); // Usar istringstream para dividir las líneas
+		istringstream iss(linea); // Usar istringstream para dividir las lï¿½neas
 
 		string usernameYaExistente;
 
@@ -67,14 +67,14 @@ auto usernameYaExistente = make_shared<function<bool(const  string)>>(
 	}
 );
 
-//Función para crear un nuevo usuario
+//Funciï¿½n para crear un nuevo usuario
 auto crearUsuario = [](const string username, const string& codigoUsername) {
 	//if (usernameYaExistente(username)) {
-		cout << "El username ya está ocupado." << endl;
+		cout << "El username ya estï¿½ ocupado." << endl;
 		return;
 	//}
-	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'añadir')
-	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (añadir una coma para facilitar el análisis más tarde)
+	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'aï¿½adir')
+	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (aï¿½adir una coma para facilitar el anï¿½lisis mï¿½s tarde)
 };
 
 auto getEdadValidada = []() -> int {
@@ -85,13 +85,13 @@ auto getEdadValidada = []() -> int {
 		cin >> edad;
 
 		if (cin.fail()) {
-			cin.clear(); // borrar el búfer de entrada para restaurar cin a un estado utilizable
-			cin.ignore(INT_MAX, '\n'); // ignorar la última entrada si cin.fail es true
-			cout << "Por favor, ingrese un número válido para la edad." << endl;
+			cin.clear(); // borrar el bï¿½fer de entrada para restaurar cin a un estado utilizable
+			cin.ignore(INT_MAX, '\n'); // ignorar la ï¿½ltima entrada si cin.fail es true
+			cout << "Por favor, ingrese un nï¿½mero vï¿½lido para la edad." << endl;
 		}
 		else if (edad < 0 || edad > 120)
 		{
-			cout << "Por favor, ingrese una edad válida (0-120)." << endl;
+			cout << "Por favor, ingrese una edad vï¿½lida (0-120)." << endl;
 		}
 		else 
 		{
@@ -164,7 +164,7 @@ void RegistrarAutor(vector<string>& datos) {
 }
 
 
-// Función para guardar libros en un archivo
+// Funciï¿½n para guardar libros en un archivo
 void GuardarLibroEnArchivo() {
 	ofstream outFile("libros.txt");
 	for (int i = 0; i < lst_libro->longitud(); i++) {
@@ -175,12 +175,12 @@ void GuardarLibroEnArchivo() {
 }
 
 
-// Función para cargar libros desde un archivo
+// Funciï¿½n para cargar libros desde un archivo
 
 void CargarLibrosDesdeArchivo() {
 	initializeLocale();
 
-	ifstream inFile("libros.txt"); // especificamente aquí ".\LiteraNet\LiteraNet\libros.txt"
+	ifstream inFile("libros.txt"); // especificamente aquï¿½ ".\LiteraNet\LiteraNet\libros.txt"
 	string line;
 
 	while (getline(inFile, line)) {
@@ -204,7 +204,7 @@ void MostrarAutor() {
 }
 
 
-// Función para agregar colores al texo desde Windows.h
+// Funciï¿½n para agregar colores al texo desde Windows.h
 void setColor(int color) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
@@ -212,12 +212,12 @@ void setColor(int color) {
 //Prospecto de Menu
 int menu() {
 
-	// estética del menú
+	// estï¿½tica del menï¿½
 
 	const int Blue = 9;
 	const int Default = 7;
 
-	// menú opciones
+	// menï¿½ opciones
 	//Prospecto de Menu
 	initializeLocale();
 
@@ -231,13 +231,10 @@ int menu() {
 	cout << "5. Buscar Libro." << endl;
 	cout << "6. Agregar Libro." << endl;
 	cout << "7. Mostrar Libros." << endl;
-	cout << "8. Guardar Libros al Archivo." << endl;
-	cout << "9. Cargar Libros desde Archivo." << endl;
-	cout << "10. Reservar Libro." << endl;  //exit
-	cout << "11. Agregar Review." << endl;  //exit
-	cout << "12. Salir." << endl;  //exit
-
-
+	cout << "8. Comprar Libros." << endl;
+	cout << "9. Reservar Libro." << endl;  //exit
+	cout << "10. Agregar Review." << endl;  //exit
+	cout << "11. Salir." << endl;  //exit
 	setColor(Blue);
 	cout << "Ingrese una opcion: ";
 	setColor(Default);
@@ -246,7 +243,7 @@ int menu() {
 	do {
 		cin >> op;
 		if (cin.fail() || op < 1 || op > 11) {
-			cout << "Opción no válida. Por favor, ingrese una opción válida (1-11): ";
+			cout << "Opciï¿½n no vï¿½lida. Por favor, ingrese una opciï¿½n vï¿½lida (1-11): ";
 			cin.clear();
 
 			cin.ignore();
@@ -260,7 +257,7 @@ int menu() {
 Usuario* buscarUsuario(string codigo) {
 	for (int i = 0; i < lst_usuario->longitud(); i++) {
 		if (lst_usuario->obtenerPos(i)->getCodigo() == codigo) {
-			cout << "Se encontró el Usuario: " << endl;
+			cout << "Se encontrï¿½ el Usuario: " << endl;
 			cout << lst_usuario->obtenerPos(i)->getCodigo() << endl;
 			cout << lst_usuario->obtenerPos(i)->getNombre() << endl;
 			return lst_usuario->obtenerPos(i);
@@ -304,7 +301,7 @@ void buscarLibroPorCodigo(string codigoli) {
 			encontrado = true;
 			cout << "Detalles del Libro:" << endl;
 			lst_libro->obtenerPos(i)->obtenerDetalles();
-			break; // Detener la búsqueda una vez encontrado
+			break; // Detener la bï¿½squeda una vez encontrado
 		}
 	}
 
@@ -314,10 +311,61 @@ void buscarLibroPorCodigo(string codigoli) {
 }
 
 
+auto operacionComprarLibros = []() {
+	string codigo;
+	cout << "Ingrese el codigo del libro que desea comprar: ";
+	cin >> codigo;
+
+	// Buscar libro por cÃ³digo
+	ifstream inFile("libros.txt");
+	string line;
+	bool found = false;
+
+	while (getline(inFile, line)) {
+		Libro libro = Libro::Deserializar(line);
+		if (libro.getCodigo() == codigo) {
+			found = true;
+
+			// Mostrar detalles del libro
+			libro.obtenerDetalles();
+
+			// Confirmar compra
+			cout << "Â¿Desea comprar este libro? (y/n): ";
+			char confirm;
+
+			cin >> confirm;
+
+			if (tolower(confirm) == 'y') {
+				// Realizar el pago aquÃ­ usando la clase Pago
+				Pago pago(libro.getPrecio(), Efectivo, Soles);
+
+				if (pago.procesarPago()) {
+					cout << "Compra exitosa. Gracias por comprar con nosotros." << endl;
+				}
+				else {
+					cout << "Compra fallida. Por favor, intente de nuevo mÃ¡s tarde." << endl;
+				}
+			}
+			else {
+				cout << "Compra cancelada." << endl;
+			}
+
+			break;
+		}
+	}
+
+	inFile.close();
+
+	if (!found) {
+		cout << "Libro no encontrado." << endl;
+	}
+};
+
+
 int main()
 {
 
-	//Apariencia: validación de tildes y colores
+	//Apariencia: validaciï¿½n de tildes y colores
 	initializeLocale();
 	const int Blue = 9; // Color Azul
 	const int Default = 7; // Color predeterminado
@@ -338,7 +386,7 @@ int main()
 		};
 
 	auto operacionBuscarUsuario = [&codigous]() { // Usando codigous
-		cout << "Ingrese el código del usuario: ";
+		cout << "Ingrese el cï¿½digo del usuario: ";
 		cin >> codigous;
 		buscarUsuario(codigous);
 		_getch();
@@ -354,19 +402,19 @@ int main()
 		string codigo, nombre;
 		double precio;
 
-		cout << "Ingrese el código del libro: ";
+		cout << "Ingrese el cï¿½digo del libro: ";
 		cin >> codigo;
 		cout << "Ingrese el nombre del libro: ";
 		cin >> nombre;
 
-		// Validación del precio para que no sea bucle infinito
+		// Validaciï¿½n del precio para que no sea bucle infinito
 		while (true) {
 			cout << "Ingrese el precio del libro: ";
 			if (cin >> precio) {
 				break;
 			}
 			else {
-				cout << "Precio no válido. Por favor, ingrese un valor numérico válido." << endl;
+				cout << "Precio no vï¿½lido. Por favor, ingrese un valor numï¿½rico vï¿½lido." << endl;
 				cin.clear(); // Restaura el estado del flujo de entrada
 				cin.ignore(); // Limpia el buffer de entrada
 			}
@@ -482,31 +530,27 @@ int main()
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch(); // esperar a que el usuario presione tecla
 			break;
-		case 8: //
-			GuardarLibroEnArchivo();
-			cout << "Libros guardados exitosamente." << endl;
+		case 8:
+			operacionMostrarLibros();
+			operacionComprarLibros();
+			cout << "Presiona cualquier tecla para continuar...";
+			_getch();
+			break;
 
-			_getch();
-			break;
-		case 9: //  caso para cargar libros desde un archivo.
-			CargarLibrosDesdeArchivo();
-			cout << "Libros cargados exitosamente." << endl;
-			_getch();
-			break;
-		case 10: // Reservar Libro
+		case 9: // Reservar Libro
 			reservarLibro();
 			break;
-		case 11: // Agregar REserña
+		case 10: // Agregar REserÃ±a
 			cout << " Agregar Review.";
-		case 12: // Exit Option
+		case 11: // Exit Option
 			cout << "Hasta luego, gracias por usar nuestro servicio.";
 			_getch();
 			exit(0);
 		default:
-			cout << "Opción no válida. Por favor, intente de nuevo.\n";
+			cout << "Opcion no vÃ¡lida. Por favor, intente de nuevo.\n";
 			break;
 		}
-	} while (op != 10);
+	} while (op != 0);
 
 
 	return 0;
