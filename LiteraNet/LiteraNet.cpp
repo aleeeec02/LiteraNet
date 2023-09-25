@@ -96,7 +96,7 @@ auto getEdadValidada = []() -> int {
 		else 
 		{
 			cin.ignore();
-			return edad; // good input
+			return edad; // good input J4EMCM6Z ESP003
 		}
 	}
 };
@@ -114,9 +114,6 @@ void crearUsuario2(int num) {
 	cin >> apellido;
 
 	edad = getEdadValidada();
-
-	cout << "Ingresar edad: ";
-	cin >> edad;
 	cout << "Ingresar correo: ";
 	cin >> correo;
 	cout << "Ingresar DNI: ";
@@ -190,6 +187,7 @@ void CargarLibrosDesdeArchivo() {
 		Libro libro = Libro::Deserializar(line);
 
 		lst_libro->agregar(&libro);  
+		lst_libro->agregaFinal(&libro);  
 	}
 
 	inFile.close();
@@ -234,7 +232,9 @@ int menu() {
 	cout << "6. Agregar Libro." << endl;
 	cout << "7. Mostrar Libros." << endl;
 	cout << "8. Comprar Libros." << endl;
-	cout << "9. Salir." << endl;  //exit
+	cout << "9. Reservar Libro." << endl;  //exit
+	cout << "10. Agregar Review." << endl;  //exit
+	cout << "11. Salir." << endl;  //exit
 
 
 	setColor(Blue);
@@ -244,13 +244,15 @@ int menu() {
 
 	do {
 		cin >> op;
-		if (cin.fail() || op < 1 || op > 9) {
-			cout << "Opcion no valida. Por favor, ingrese una opcion valida (1-9): ";
+
+		if (cin.fail() || op < 1 || op > 11) {
+			cout << "Opción no válida. Por favor, ingrese una opción válida (1-11): ";
 			cin.clear();
 
 			cin.ignore();
 		}
-	} while (cin.fail() || op < 1 || op > 9);
+
+	} while (cin.fail() || op < 1 || op > 11);
 	return op;
 
 }
@@ -266,6 +268,24 @@ Usuario* buscarUsuario(string codigo) {
 		}
 	}
 	cout << "Error: Usuario No Registrado";
+}
+
+Libro buscarLibro(string codigo) {
+	ifstream inFile("libros.txt"); // Recibe datos de libros.txt
+	string line;
+	bool found = false;
+	while (getline(inFile, line)) {
+		Libro libro = Libro::Deserializar(line);
+		if (libro.getCodigo() == codigo) {
+			found = true;
+			return libro;
+		}
+	}
+
+	inFile.close();
+	if (!found) {
+		cout << "Libro no encontrado." << endl;
+	}
 }
 
 
@@ -449,7 +469,6 @@ int main()
 		inFile.close();
 		};
 
-
 	auto operacionBuscarLibro = []() {
 		initializeLocale();
 		string codigoli;
@@ -477,8 +496,20 @@ int main()
 		}
 		};
 
-
-
+	auto reservarLibro = []() {
+		initializeLocale();
+		Usuario* usuarioExistente;
+		Libro libroExistente;
+		string codUser, codLibro;
+		Reserva reserva;
+		cout << "Ingrese su codigo de usuario: "; cin >> codUser;
+		cout << "Ingrese codigo del libro: "; cin >> codLibro;
+		usuarioExistente = buscarUsuario(codUser);
+		libroExistente = buscarLibro(codLibro);
+		reserva.generarReserva(usuarioExistente, &libroExistente);
+		reserva.mostrarDetallesReserva();
+	};
+	//6EEN6148
 	do {
 		system("cls");
 		op = menu();
@@ -518,7 +549,12 @@ int main()
 			_getch();
 			break;
 
-		case 9: // Exit Option
+		case 9: // Reservar Libro
+			reservarLibro();
+			break;
+		case 10: // Agregar REserña
+			cout << " Agregar Review.";
+		case 11: // Exit Option
 			cout << "Hasta luego, gracias por usar nuestro servicio.";
 			_getch();
 			exit(0);
