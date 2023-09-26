@@ -41,19 +41,19 @@ Lista<Autor*>* lst_autor = new Lista<Autor*>();
 // ****************************************//
 
 void initializeLocale() {
-	setlocale(LC_ALL, "es_ES.UTF-8");  // aplicar tildes a todo el código
+	setlocale(LC_ALL, "es_ES.UTF-8");  // aplicar tildes a todo el cÃ³digo
 }
 
-//Función para verificar si el username existe
+//FunciÃ³n para verificar si el username existe
 auto usernameYaExistente = make_shared<function<bool(const  string)>>(
 	[](const string& username) -> bool {
 
 	ifstream archivoEntrada("usernames.txt");
 	string linea;
 
-	//Lee cada línea del archivo
+	//Lee cada lÃ­nea del archivo
 	while (getline(archivoEntrada, linea)) {
-		istringstream iss(linea); // Usar istringstream para dividir las líneas
+		istringstream iss(linea); // Usar istringstream para dividir las lÃ­neas
 
 		string usernameYaExistente;
 
@@ -68,14 +68,14 @@ auto usernameYaExistente = make_shared<function<bool(const  string)>>(
 	}
 );
 
-//Función para crear un nuevo usuario
+//FunciÃ³n para crear un nuevo usuario
 auto crearUsuario = [](const string username, const string& codigoUsername) {
 	//if (usernameYaExistente(username)) {
-		cout << "El username ya está ocupado." << endl;
+		cout << "El username ya estÃ¡ ocupado." << endl;
 		return;
 	//}
-	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'añadir')
-	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (añadir una coma para facilitar el análisis más tarde)
+	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'aÃ±adir')
+	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (aÃ±adir una coma para facilitar el anÃ¡lisis mÃ¡s tarde)
 };
 
 auto getEdadValidada = []() -> int {
@@ -86,13 +86,13 @@ auto getEdadValidada = []() -> int {
 		cin >> edad;
 
 		if (cin.fail()) {
-			cin.clear(); // borrar el búfer de entrada para restaurar cin a un estado utilizable
-			cin.ignore(INT_MAX, '\n'); // ignorar la última entrada si cin.fail es true
-			cout << "Por favor, ingrese un número válido para la edad." << endl;
+			cin.clear(); // borrar el bÃºfer de entrada para restaurar cin a un estado utilizable
+			cin.ignore(INT_MAX, '\n'); // ignorar la Ãºltima entrada si cin.fail es true
+			cout << "Por favor, ingrese un nÃºmero vÃ¡lido para la edad." << endl;
 		}
 		else if (edad < 0 || edad > 120)
 		{
-			cout << "Por favor, ingrese una edad válida (0-120)." << endl;
+			cout << "Por favor, ingrese una edad vÃ¡lida (0-120)." << endl;
 		}
 		else 
 		{
@@ -165,7 +165,7 @@ void RegistrarAutor(vector<string>& datos) {
 }
 
 
-// Función para guardar libros en un archivo
+// FunciÃ³n para guardar libros en un archivo
 void GuardarLibroEnArchivo() {
 	ofstream outFile("libros.txt");
 	for (int i = 0; i < lst_libro->longitud(); i++) {
@@ -176,12 +176,12 @@ void GuardarLibroEnArchivo() {
 }
 
 
-// Función para cargar libros desde un archivo
+// FunciÃ³n para cargar libros desde un archivo
 
 void CargarLibrosDesdeArchivo() {
 	initializeLocale();
 
-	ifstream inFile("libros.txt"); // especificamente aquí ".\LiteraNet\LiteraNet\libros.txt"
+	ifstream inFile("libros.txt"); // especificamente aquÃ­ ".\LiteraNet\LiteraNet\libros.txt"
 	string line;
 
 	while (getline(inFile, line)) {
@@ -205,7 +205,7 @@ void MostrarAutor() {
 }
 
 
-// Función para agregar colores al texo desde Windows.h
+// FunciÃ³n para agregar colores al texo desde Windows.h
 void setColor(int color) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
@@ -213,12 +213,12 @@ void setColor(int color) {
 //Prospecto de Menu
 int menu() {
 
-	// estética del menú
+	// estÃ©tica del menÃº
 
 	const int Blue = 9;
 	const int Default = 7;
 
-	// menú opciones
+	// menÃº opciones
 	//Prospecto de Menu
 	initializeLocale();
 
@@ -248,7 +248,7 @@ int menu() {
 	do {
 		cin >> op;
 		if (cin.fail() || op < 1 || op > 13) {
-			cout << "Opción no válida. Por favor, ingrese una opción válida (1-12): ";
+			cout << "OpciÃ³n no vÃ¡lida. Por favor, ingrese una opciÃ³n vÃ¡lida (1-12): ";
 			cin.clear();
 
 			cin.ignore();
@@ -305,7 +305,7 @@ void buscarLibroPorCodigo(string codigoli) {
 			encontrado = true;
 			cout << "Detalles del Libro:" << endl;
 			lst_libro->obtenerPos(i)->obtenerDetalles();
-			break; // Detener la búsqueda una vez encontrado
+			break; // Detener la bÃºsqueda una vez encontrado
 		}
 	}
 
@@ -318,7 +318,7 @@ void buscarLibroPorCodigo(string codigoli) {
 int main()
 {
 
-	//Apariencia: validación de tildes y colores
+	//Apariencia: validaciÃ³n de tildes y colores
 	initializeLocale();
 	const int Blue = 9; // Color Azul
 	const int Default = 7; // Color predeterminado
@@ -339,7 +339,7 @@ int main()
 		};
 
 	auto operacionBuscarUsuario = [&codigous]() { // Usando codigous
-		cout << "Ingrese el código del usuario: ";
+		cout << "Ingrese el cÃ³digo del usuario: ";
 		cin >> codigous;
 		buscarUsuario(codigous);
 		_getch();
@@ -355,19 +355,19 @@ int main()
 		string codigo, nombre;
 		double precio;
 
-		cout << "Ingrese el código del libro: ";
+		cout << "Ingrese el cÃ³digo del libro: ";
 		cin >> codigo;
 		cout << "Ingrese el nombre del libro: ";
 		cin >> nombre;
 
-		// Validación del precio para que no sea bucle infinito
+		// ValidaciÃ³n del precio para que no sea bucle infinito
 		while (true) {
 			cout << "Ingrese el precio del libro: ";
 			if (cin >> precio) {
 				break;
 			}
 			else {
-				cout << "Precio no válido. Por favor, ingrese un valor numérico válido." << endl;
+				cout << "Precio no vÃ¡lido. Por favor, ingrese un valor numÃ©rico vÃ¡lido." << endl;
 				cin.clear(); // Restaura el estado del flujo de entrada
 				cin.ignore(); // Limpia el buffer de entrada
 			}
@@ -477,7 +477,7 @@ int main()
 		libroRev->obtenerDetalles();
 	};
 
-	//KI300DLP
+	//RZRGSOJD
 
 	do {
 		system("cls");
@@ -531,7 +531,7 @@ int main()
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
 			break;
-		case 12: // Agregar Reseñas
+		case 12: // Agregar ReseÃ±as
 			agregarReview();
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
@@ -541,7 +541,7 @@ int main()
 			_getch();
 			exit(0);
 		default:
-			cout << "Opción no válida. Por favor, intente de nuevo.\n";
+			cout << "OpciÃ³n no vÃ¡lida. Por favor, intente de nuevo.\n";
 			break;
 		}
 	} while (op != 13);
