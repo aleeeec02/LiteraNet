@@ -19,7 +19,7 @@ using namespace std;
 class Libro;
 
 class Usuario : public Persona {
-private:
+protected:
 	string direccion;
 	string userID;
 

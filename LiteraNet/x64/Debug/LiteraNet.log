@@ -1,25 +1,27 @@
 ﻿  LiteraNet.cpp
-D:\literanettt\LiteraNet\LiteraNet\Pago.h(10,11): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(131,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(173,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(201,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(261,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(284,20): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\Lista.h(152,34): message : al compilar la función del miembro clase plantilla "T Lista<T>::obtenerPos(uint)"
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Pago.h(10,11): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(129,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(171,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(200,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(263,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(303,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(466,11): warning C4101: 'review': variable local sin referencia
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': no coinciden signed/unsigned
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Lista.h(152,34): message : al compilar la función del miembro clase plantilla "T Lista<T>::obtenerPos(uint)"
           with
           [
               T=Libro *
           ]
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(174,53): message : vea la primera referencia a “Lista<Libro *>::obtenerPos” en “GuardarLibroEnArchivo”
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(33,32): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Libro *>" que se está compilando
-D:\literanettt\LiteraNet\LiteraNet\Lista.h(89,27): warning C4018: '<': no coinciden signed/unsigned
-D:\literanettt\LiteraNet\LiteraNet\Lista.h(82,45): message : al compilar la función del miembro clase plantilla "void Lista<Usuario *>::agregarPos(T,uint)"
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(172,53): message : vea la primera referencia a “Lista<Libro *>::obtenerPos” en “GuardarLibroEnArchivo”
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(34,32): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Libro *>" que se está compilando
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Lista.h(89,27): warning C4018: '<': no coinciden signed/unsigned
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\Lista.h(82,45): message : al compilar la función del miembro clase plantilla "void Lista<Usuario *>::agregarPos(T,uint)"
           with
           [
               T=Usuario *
           ]
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(127,25): message : vea la primera referencia a “Lista<Usuario *>::agregarPos” en “crearUsuario2”
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(34,36): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Usuario *>" que se está compilando
-D:\literanettt\LiteraNet\LiteraNet\LiteraNet.cpp(270): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
-  LiteraNet.vcxproj -> D:\literanettt\LiteraNet\x64\Debug\LiteraNet.exe
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(125,25): message : vea la primera referencia a “Lista<Usuario *>::agregarPos” en “crearUsuario2”
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(35,36): message : Vea la referencia a la creación de una instancia de clase plantilla "Lista<Usuario *>" que se está compilando
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(269): warning C4715: 'buscarUsuario': no todas las rutas de acceso de control devuelven un valor
+C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\LiteraNet\LiteraNet.cpp(289): warning C4715: 'buscarLibro': no todas las rutas de acceso de control devuelven un valor
+  LiteraNet.vcxproj -> C:\Samuel\repositories\Algoritmos_Estructuras\LiteraNet\x64\Debug\LiteraNet.exe

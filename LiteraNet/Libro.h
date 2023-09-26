@@ -69,14 +69,13 @@ public:
     // Obtener detalles del libro
     void obtenerDetalles() const {
         void initializeLocale();
-
+        Node* temp = head;
         cout << "Codigo: " << codigo << endl;
         cout << "Nombre: " << nombre << endl;
         cout << "Precio: " << precio << endl;
-        cout << "Resenas: " << endl;
-        Node* temp = head;
+        cout << "Resenas: " <<endl;
         while (temp != nullptr) {
-            temp->data.getReview();
+            temp->data.showReview();
             temp = temp->next;
         }
     }

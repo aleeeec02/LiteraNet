@@ -4,7 +4,7 @@
 
 
 //Por el momento la clase Persona en realidad no necesita template
-//Revisar el constructor y destructor
+//Revisar el constructor y destructor HX72PDMC
 
 
 class Persona {
@@ -27,7 +27,7 @@ public:
 	int getEdad();
 	int getDNI();
 
-private:
+protected:
 	string nombre, apellido;
 	int edad, dni;
 	string correo;

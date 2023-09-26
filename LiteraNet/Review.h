@@ -8,7 +8,13 @@ class Review {
 public:
 	Review(string resumen) { this->resumen = resumen; }
 	Review(){}
-	void getReview() {
-		cout << resumen << endl;
+	void  addReview(string resumen) {
+		this->resumen = resumen;
+	};
+	string getReview() {
+		return this->resumen;
+	};
+	void showReview() {
+		cout << this->resumen<<endl;
 	}
 };

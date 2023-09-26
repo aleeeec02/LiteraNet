@@ -4,3 +4,4 @@ ESP003,El Señor de los Anillos,18.50,La obra maestra de fantasía de J.R.R. Tol
 ESP004,La Divina Comedia,12.75,Dante explora el infierno en su obra maestra.
 Recetas,lib334,45
 Recetas,lib502,78
+asd,asd,45
