@@ -48,35 +48,35 @@ void initializeLocale() {
 auto usernameYaExistente = make_shared<function<bool(const  string)>>(
 	[](const string& username) -> bool {
 
-	ifstream archivoEntrada("usernames.txt");
-	string linea;
+		ifstream archivoEntrada("usernames.txt");
+		string linea;
 
-	//Lee cada línea del archivo
-	while (getline(archivoEntrada, linea)) {
-		istringstream iss(linea); // Usar istringstream para dividir las líneas
+		//Lee cada línea del archivo
+		while (getline(archivoEntrada, linea)) {
+			istringstream iss(linea); // Usar istringstream para dividir las líneas
 
-		string usernameYaExistente;
+			string usernameYaExistente;
 
-		// Si no se puede leer el username del usuario, terminar ciclo
-		if (!(iss >> usernameYaExistente)) { break; }
+			// Si no se puede leer el username del usuario, terminar ciclo
+			if (!(iss >> usernameYaExistente)) { break; }
 
-		if (usernameYaExistente == username) {
-			return true;
+			if (usernameYaExistente == username) {
+				return true;
+			}
 		}
-	}
-	return false; // Retorna falso si el usuario no existe (bool)
+		return false; // Retorna falso si el usuario no existe (bool)
 	}
 );
 
 //Función para crear un nuevo usuario
 auto crearUsuario = [](const string username, const string& codigoUsername) {
 	//if (usernameYaExistente(username)) {
-		cout << "El username ya está ocupado." << endl;
-		return;
+	cout << "El username ya está ocupado." << endl;
+	return;
 	//}
 	ofstream archivoSalida("usernames.txt", ios::app); // 'append' mode (modo 'añadir')
 	archivoSalida << username << "," << codigoUsername << "\n"; // Add a comma for easy parsing later (añadir una coma para facilitar el análisis más tarde)
-};
+	};
 
 auto getEdadValidada = []() -> int {
 	int edad;
@@ -94,13 +94,13 @@ auto getEdadValidada = []() -> int {
 		{
 			cout << "Por favor, ingrese una edad válida (0-120)." << endl;
 		}
-		else 
+		else
 		{
 			cin.ignore();
 			return edad; // good input J4EMCM6Z ESP003
 		}
 	}
-};
+	};
 
 
 void crearUsuario2(int num) {
@@ -188,8 +188,8 @@ void CargarLibrosDesdeArchivo() {
 		Libro libro = Libro::Deserializar(line);
 		// Add this libro object to your list
 		// Assuming lst_libro is your list of Libros
-		lst_libro->agregar(&libro);  
-		lst_libro->agregaFinal(&libro);  
+		lst_libro->agregar(&libro);
+		lst_libro->agregaFinal(&libro);
 	}
 
 	inFile.close();
@@ -232,12 +232,11 @@ int menu() {
 	cout << "5. Buscar Libro." << endl;
 	cout << "6. Agregar Libro." << endl;
 	cout << "7. Mostrar Libros." << endl;
-	cout << "8. Guardar Libros al Archivo." << endl;
-	cout << "9. Cargar Libros desde Archivo." << endl;
-	cout << "10. Reservar Libro." << endl;  //exit
-	cout << "11. Mostrar Reservas." << endl;  //exit
-	cout << "12. Agregar Review." << endl;  //exit
-	cout << "13. Salir." << endl;  //exit
+	cout << "8. Comprar Libros." << endl;
+	cout << "9. Reservar Libro." << endl;
+	cout << "10. Mostrar Reservas." << endl;
+	cout << "11. Agregar Review." << endl;
+	cout << "12. Salir." << endl;
 
 
 	setColor(Blue);
@@ -247,13 +246,13 @@ int menu() {
 
 	do {
 		cin >> op;
-		if (cin.fail() || op < 1 || op > 13) {
+		if (cin.fail() || op < 1 || op > 12) {
 			cout << "Opción no válida. Por favor, ingrese una opción válida (1-12): ";
 			cin.clear();
 
 			cin.ignore();
 		}
-	} while (cin.fail() || op < 1 || op > 13);
+	} while (cin.fail() || op < 1 || op > 12);
 	return op;
 
 }
@@ -313,7 +312,60 @@ void buscarLibroPorCodigo(string codigoli) {
 		cout << "Libro no encontrado." << endl;
 	}
 }
+auto operacionComprarLibros = []() {
+	string codigo;
+	cout << "Ingrese el codigo del libro que desea comprar: ";
+	cin >> codigo;
 
+	// Buscar libro por cÃ³digo
+	ifstream inFile("libros.txt");
+	string line;
+	bool found = false;
+
+	while (getline(inFile, line)) {
+		Libro libro = Libro::Deserializar(line);
+		if (libro.getCodigo() == codigo) {
+			found = true;
+
+			// Mostrar detalles del libro
+			libro.obtenerDetalles();
+			// Confirmar compra
+			cout << "Â¿Desea comprar este libro? (y/n): ";
+			char confirm;
+
+			cin >> confirm;
+
+			if (tolower(confirm) == 'y') {
+				// Realizar el pago aquÃ­ usando la clase Pago
+				Pago pago(libro.getPrecio(), Efectivo, Soles);
+
+				if (pago.procesarPago()) {
+					cout << "Compra exitosa. Gracias por comprar con nosotros." << endl;
+
+				}
+				else {
+					cout << "Compra fallida. Por favor, intente de nuevo mÃ¡s tarde." << endl;
+
+				}
+
+			}
+			else {
+				cout << "Compra cancelada." << endl;
+
+			}
+			break;
+
+		}
+
+	}
+
+	inFile.close();
+
+	if (!found) {
+		cout << "Libro no encontrado." << endl;
+
+	}
+	};
 
 int main()
 {
@@ -436,8 +488,8 @@ int main()
 		if (!found) {
 			cout << "Libro no encontrado." << endl;
 		}
-	};
-	//RESERVA FUNCION
+		};
+	//RESERVA FUNCION MSJ7BSAG
 	auto reservarLibro = []() {
 		initializeLocale();
 		Usuario* usuarioExistente;
@@ -451,22 +503,22 @@ int main()
 		reserva = new Reserva(usuarioExistente, libroExistente);
 		reserva->mostrarDetallesReserva();
 		cola_reserva->encolar(reserva);
-	};
+		};
 
 	auto mostrarReservas = []() {
-		Reserva *reserva_uni;
+		Reserva* reserva_uni;
 
 		do {
 			reserva_uni = cola_reserva->desencolar();
 			reserva_uni->mostrarDetallesReserva();
 		} while (!cola_reserva->esVacia());
-	};
+		};
 
 	auto agregarReview = []() {
 		Review* review;
 		Libro* libroRev;
-		string comment,codeLibro;
-		cout <<endl<< "********* Agregar Review ***********" << endl;;
+		string comment, codeLibro;
+		cout << endl << "********* Agregar Review ***********" << endl;;
 		cout << "Ingrese Codigo del libro: "; cin >> codeLibro;
 		libroRev = buscarLibro(codeLibro);
 		libroRev->obtenerDetalles();
@@ -475,7 +527,7 @@ int main()
 		getline(cin, comment);
 		libroRev->agregarResena(comment);
 		libroRev->obtenerDetalles();
-	};
+		};
 
 	//RZRGSOJD
 
@@ -511,32 +563,27 @@ int main()
 			_getch(); // esperar a que el usuario presione tecla
 			break;
 		case 8: // KT15MYE9
-			GuardarLibroEnArchivo();
-			cout << "Libros guardados exitosamente." << endl;
-
+			operacionMostrarLibros();
+			operacionComprarLibros();
+			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
 			break;
-		case 9: //  caso para cargar libros desde un archivo.
-			CargarLibrosDesdeArchivo();
-			cout << "Libros cargados exitosamente." << endl;
-			_getch();
-			break;
-		case 10: // Reservar Libro
+		case 9: // Reservar Libro
 			reservarLibro();
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
 			break;
-		case 11: // Mostrar Reservas
+		case 10: // Mostrar Reservas
 			mostrarReservas();
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
 			break;
-		case 12: // Agregar Reseñas
+		case 11: // Agregar Reseñas
 			agregarReview();
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
 			break;
-		case 13: // Exit Option
+		case 12: // Exit Option XY71H79E
 			cout << "Hasta luego, gracias por usar nuestro servicio.";
 			_getch();
 			exit(0);
@@ -544,7 +591,7 @@ int main()
 			cout << "Opción no válida. Por favor, intente de nuevo.\n";
 			break;
 		}
-	} while (op != 13);
+	} while (op != 12);
 
 
 	return 0;
