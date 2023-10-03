@@ -6,6 +6,8 @@ enum MetodoPago { Efectivo, Tarjeta };
 enum Moneda { Soles, Dolares };
 
 // Función para validar una tarjeta de crédito usando el algoritmo de Luhn (Algoritmo de Luhn)
+
+
 bool validarTarjeta(string numero) {
     int n = numero.length();
     int suma = 0;
