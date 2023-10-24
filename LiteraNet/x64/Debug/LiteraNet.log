@@ -1,27 +1,27 @@
 ﻿  LiteraNet.cpp
-D:\@aleeeec02\LiteraNet\LiteraNet\Pago.h(12,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(140,20): warning C4018: '<': signed/unsigned mismatch
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(182,20): warning C4018: '<': signed/unsigned mismatch
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(211,20): warning C4018: '<': signed/unsigned mismatch
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(273,20): warning C4018: '<': signed/unsigned mismatch
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(313,20): warning C4018: '<': signed/unsigned mismatch
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(538,11): warning C4101: 'review': unreferenced local variable
+D:\@aleeeec02\LiteraNet\LiteraNet\Pago.h(13,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(139,20): warning C4018: '<': signed/unsigned mismatch
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(181,20): warning C4018: '<': signed/unsigned mismatch
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(210,20): warning C4018: '<': signed/unsigned mismatch
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(272,20): warning C4018: '<': signed/unsigned mismatch
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(312,20): warning C4018: '<': signed/unsigned mismatch
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(537,11): warning C4101: 'review': unreferenced local variable
 D:\@aleeeec02\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': signed/unsigned mismatch
 D:\@aleeeec02\LiteraNet\LiteraNet\Lista.h(152,34): message : while compiling class template member function 'T Lista<T>::obtenerPos(uint)'
           with
           [
               T=Libro *
           ]
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(183,53): message : see the first reference to 'Lista<Libro *>::obtenerPos' in 'GuardarLibroEnArchivo'
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(36,32): message : see reference to class template instantiation 'Lista<Libro *>' being compiled
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(182,53): message : see the first reference to 'Lista<Libro *>::obtenerPos' in 'GuardarLibroEnArchivo'
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(35,32): message : see reference to class template instantiation 'Lista<Libro *>' being compiled
 D:\@aleeeec02\LiteraNet\LiteraNet\Lista.h(89,27): warning C4018: '<': signed/unsigned mismatch
 D:\@aleeeec02\LiteraNet\LiteraNet\Lista.h(82,45): message : while compiling class template member function 'void Lista<Usuario *>::agregarPos(T,uint)'
           with
           [
               T=Usuario *
           ]
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(127,25): message : see the first reference to 'Lista<Usuario *>::agregarPos' in 'crearUsuario2'
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(37,36): message : see reference to class template instantiation 'Lista<Usuario *>' being compiled
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(279): warning C4715: 'buscarUsuario': not all control paths return a value
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(299): warning C4715: 'buscarLibro': not all control paths return a value
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(126,25): message : see the first reference to 'Lista<Usuario *>::agregarPos' in 'crearUsuario2'
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(36,36): message : see reference to class template instantiation 'Lista<Usuario *>' being compiled
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(278): warning C4715: 'buscarUsuario': not all control paths return a value
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(298): warning C4715: 'buscarLibro': not all control paths return a value
   LiteraNet.vcxproj -> D:\@aleeeec02\LiteraNet\x64\Debug\LiteraNet.exe

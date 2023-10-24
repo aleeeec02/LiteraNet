@@ -6,7 +6,6 @@
 #include "Lista.h"
 #include "Usuario.h"
 
-using namespace std;
 
 
 auto getEdadValidada = []() -> int {

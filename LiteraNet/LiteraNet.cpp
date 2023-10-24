@@ -3,7 +3,6 @@
 #include <stdio.h>
 
 #include "Usuario.h"
-#include "Administrador.h"
 #include "Autor.h"
 
 #include "Review.h"
@@ -551,6 +550,7 @@ int main()
 
 	//RZRGSOJD
 
+
 	do {
 		system("cls");
 		op = menu();
@@ -612,7 +612,7 @@ int main()
 			cout << "Opción no válida. Por favor, intente de nuevo.\n";
 			break;
 		}
-	} while (op != 12);
+	} while (op != 13);
 
 
 	return 0;
