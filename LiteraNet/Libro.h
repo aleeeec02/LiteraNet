@@ -86,7 +86,8 @@ public:
 
             Node* temp = head;
             while (temp != nullptr) {
-                outFile << temp->next;
+                outFile << temp->data.getReview();
+                temp = temp->next;
                 if (temp != nullptr) {
                     outFile << "|"; // separador
                 }

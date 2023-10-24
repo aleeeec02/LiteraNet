@@ -135,6 +135,7 @@
     <ClInclude Include="common-dependencies.h" />
     <ClInclude Include="Libro.h" />
     <ClInclude Include="Lista.h" />
+    <ClInclude Include="Nodo_Cola.h" />
     <ClInclude Include="Pago.h" />
     <ClInclude Include="Persona.h" />
     <ClInclude Include="Reserva.h" />

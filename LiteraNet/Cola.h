@@ -47,6 +47,11 @@ void Cola<T>::encolar(T v)
 template <class T>
 T Cola<T>::desencolar()
 {
+	if (esVacia()) { // en caso que el usuario no haya agregado nada a la cola aka esté vacía
+		cout << "Por favor haga una reserva de los libros que desea primero";
+		return T();
+	}
+
 	T dato = inicio->dato;
 	if (inicio == fin)
 	{

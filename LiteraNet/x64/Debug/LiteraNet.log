@@ -5,7 +5,7 @@ D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(171,20): warning C4018: '<': sig
 D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(200,20): warning C4018: '<': signed/unsigned mismatch
 D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(262,20): warning C4018: '<': signed/unsigned mismatch
 D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(302,20): warning C4018: '<': signed/unsigned mismatch
-D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(518,11): warning C4101: 'review': unreferenced local variable
+D:\@aleeeec02\LiteraNet\LiteraNet\LiteraNet.cpp(527,11): warning C4101: 'review': unreferenced local variable
 D:\@aleeeec02\LiteraNet\LiteraNet\Lista.h(155,27): warning C4018: '<': signed/unsigned mismatch
 D:\@aleeeec02\LiteraNet\LiteraNet\Lista.h(152,34): message : while compiling class template member function 'T Lista<T>::obtenerPos(uint)'
           with

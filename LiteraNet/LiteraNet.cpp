@@ -508,10 +508,19 @@ int main()
 	auto mostrarReservas = []() {
 		Reserva* reserva_uni;
 
-		do {
-			reserva_uni = cola_reserva->desencolar();
-			reserva_uni->mostrarDetallesReserva();
-		} while (!cola_reserva->esVacia());
+		if (cola_reserva->esVacia()) {
+			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+			cout << "Por favor haga una reserva de los libros que desea primero.\n" << endl;
+			SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+		} else {
+			do {
+				reserva_uni = cola_reserva->desencolar();
+				if (reserva_uni != nullptr) {
+					reserva_uni->mostrarDetallesReserva();
+				}
+			} while (!cola_reserva->esVacia());
+		}
 		};
 
 	auto agregarReview = []() {
@@ -579,6 +588,7 @@ int main()
 			_getch();
 			break;
 		case 11: // Agregar Reseñas
+			operacionMostrarLibros();
 			agregarReview();
 			cout << "Presiona cualquier tecla para continuar...";
 			_getch();
