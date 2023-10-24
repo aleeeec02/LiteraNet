@@ -3,7 +3,9 @@
 #include <stdio.h>
 
 #include "Usuario.h"
+#include "Administrador.h"
 #include "Autor.h"
+
 #include "Review.h"
 
 #include "Pago.h"
@@ -123,6 +125,15 @@ void crearUsuario2(int num) {
 	cin >> direccion;
 	Usuario* user = new Usuario(nombre, apellido, edad, dni, correo, direccion);
 	lst_usuario->agregarPos(user, num);
+
+	ofstream archivo("usuarios.txt", ios::app);
+	if (archivo.is_open()) {
+		archivo << nombre << "," << apellido << "," << edad << "," << correo << "," << dni << "," << direccion << endl;
+		archivo.close();
+	}
+	else {
+		cout << "No se pudo abrir el archivo para escribir.\n";
+	}
 }
 
 void MostrarUsuarios() {

@@ -130,9 +130,11 @@
     <ClCompile Include="LiteraNet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Administrador.h" />
     <ClInclude Include="Autor.h" />
     <ClInclude Include="Cola.h" />
     <ClInclude Include="common-dependencies.h" />
+    <ClInclude Include="GestorDeUsuarios.h" />
     <ClInclude Include="Libro.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="Nodo_Cola.h" />
